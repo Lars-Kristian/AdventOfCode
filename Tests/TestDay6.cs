@@ -1,4 +1,4 @@
-using ConsoleApp.Missions;
+using App.Day6;
 using FluentAssertions;
 
 namespace Tests;

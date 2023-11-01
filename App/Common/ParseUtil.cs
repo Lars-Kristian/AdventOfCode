@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace ConsoleApp.Common;
+namespace App.Common;
 
 public class ParseUtil
 {

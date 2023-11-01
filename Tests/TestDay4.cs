@@ -1,4 +1,4 @@
-using ConsoleApp.Day4;
+using App.Day4;
 using FluentAssertions;
 
 namespace Tests;

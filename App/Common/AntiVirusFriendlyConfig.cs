@@ -2,7 +2,7 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
 
-namespace ConsoleApp.Common;
+namespace App.Common;
 
 public class AntiVirusFriendlyConfig : ManualConfig
 {

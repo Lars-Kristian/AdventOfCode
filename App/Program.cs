@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using BenchmarkDotNet.Running;
-using ConsoleApp.Day4;
-using ConsoleApp.Missions;
+using App.Day4;
+using App.Day6;
 
 
 var modeSetup = new Dictionary<Modes, Action>()

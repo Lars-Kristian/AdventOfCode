@@ -1,6 +1,6 @@
-﻿using ConsoleApp.Common;
+﻿using App.Common;
 
-namespace ConsoleApp.Day4;
+namespace App.Day4;
 
 public static class Day4
 {

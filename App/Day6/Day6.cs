@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace ConsoleApp.Missions;
+namespace App.Day6;
 
 public static class Day6
 {

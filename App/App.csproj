@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <!--PublishAot>true</PublishAot-->
@@ -10,8 +10,8 @@
 
 
     <ItemGroup>
-      <None Remove="Missions\Day6.input" />
-      <EmbeddedResource Include="Missions\Day6.input">
+      <None Remove="Day6\Day6.input" />
+      <EmbeddedResource Include="Day6\Day6.input">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Day4\Day4.input" />
@@ -24,9 +24,4 @@
     <ItemGroup>
       <PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
     </ItemGroup>
-
-
-
-
-
 </Project>
