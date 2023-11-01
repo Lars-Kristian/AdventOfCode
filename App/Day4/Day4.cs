@@ -36,6 +36,8 @@ public static class Day4
         return result;
     }
     
+    [GenerateBenchmark]
+    [InputPath("Day4/Day4.input")]
     public static int RunB(ReadOnlySpan<char> data)
     {
         var result = 0;

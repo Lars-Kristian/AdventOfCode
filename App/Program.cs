@@ -2,6 +2,8 @@
 using BenchmarkDotNet.Running;
 using App.Day4;
 using App.Day6;
+using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
 var modeSetup = new Dictionary<Modes, Action>()
@@ -34,6 +36,14 @@ var modeSetup = new Dictionary<Modes, Action>()
     },
 };
 
+var assembly = Assembly.GetEntryAssembly();
+var methods = assembly?.GetTypes()
+                      .SelectMany(t => t.GetMethods())
+                      .Where(m => m.GetCustomAttributes(typeof(InputPathAttribute), false).Length > 0)
+                      .ToArray();
+
+var debug = "";
+
 /*
 var modes = new List<Action>()
 {
@@ -49,7 +59,9 @@ var modes = new List<Action>()
 };
 */
 
-modeSetup[Modes.Day4BBenchmark]();
+HelloWorldGenerated.HelloWorld.SayHello();
+
+modeSetup[Modes.Day4B]();
 
 public enum Modes
 {
