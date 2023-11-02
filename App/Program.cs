@@ -8,10 +8,10 @@ using RunGenerator;
 
 Console.WriteLine("Application is running...");
 
-//GeneratedRuns.Day5RunA();
 
 //GeneratedBenchmarks.Day4RunB();
 
+//GeneratedRuns.Day5RunA();
 BenchmarkRunner.Run<Day5Benchmark>();
 
 
