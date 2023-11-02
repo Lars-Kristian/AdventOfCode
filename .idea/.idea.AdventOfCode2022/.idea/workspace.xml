@@ -10,13 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Generator/BenchmarkGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Generator/RunGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/TestDay5.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Common/GenerateBenchmarkAttribute.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Common/InputPathAttribute.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Day4/Day4.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day4/Day4.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Test.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +24,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/94DE451FD0CD571EAF3C3623/Generator/GeneratedRunsGenerator/GenerateRunWithDataAttribute.g.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/213c4022a1c71e8e20f4b5369a75b4213a8fca817449f2e45753d4eb13fcf3cb/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/21f3fa85bb30cfbdbcac964876348b7b5a07bba446f9dd9f6acd4bd54879fb/Popcnt.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/74aa984eb754656295a74b19ce2c83d83a98c9474142135df2360317babf28b/MethodDeclarationSyntax.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,7 +117,7 @@
       <workItem from="1698844677412" duration="746000" />
       <workItem from="1698906261184" duration="12572000" />
       <workItem from="1698931439210" duration="1920000" />
-      <workItem from="1698933451715" duration="5877000" />
+      <workItem from="1698933451715" duration="14738000" />
     </task>
     <servers />
   </component>
@@ -133,17 +132,30 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Generator/GeneratedRunsGenerator.cs</url>
-          <line>261</line>
-          <properties documentPath="C:\Work\AdventOfCode\Generator\GeneratedRunsGenerator.cs" initialLine="261" containingFunctionPresentation="Method 'GenerateRunMethod'">
+          <url>file://$PROJECT_DIR$/App/Program.cs</url>
+          <line>22</line>
+          <properties documentPath="C:\Work\AdventOfCode\App\Program.cs" initialLine="14" containingFunctionPresentation="">
             <startOffsets>
-              <option value="10012" />
+              <option value="570" />
             </startOffsets>
             <endOffsets>
-              <option value="10033" />
+              <option value="570" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/App/Day5/Day5.cs</url>
+          <line>83</line>
+          <properties documentPath="C:\Work\AdventOfCode\App\Day5\Day5.cs" initialLine="20" containingFunctionPresentation="Method 'RunA'">
+            <startOffsets>
+              <option value="2758" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2772" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
