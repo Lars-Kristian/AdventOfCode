@@ -1,11 +1,11 @@
 ﻿using System.Numerics;
-using RunsGenerator;
+using RunGenerator;
 
 namespace App.Day6;
 
 public static class Day6
 {
-    [GenerateRunWithData("Day6/Day6.input")]
+    [GenerateRun("Day6/Day6.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
         uint state = 0;
@@ -32,7 +32,7 @@ public static class Day6
         return -1;
     }
 
-    [GenerateRunWithData("Day6/Day6.input")]
+    [GenerateRun("Day6/Day6.input")]
     public static int RunB(ReadOnlySpan<char> data)
     {
         uint state = 0;

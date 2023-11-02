@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
-using BenchmarkDotNet.Running;
-using App.Day4;
-using RunsGenerator;
+﻿using BenchmarkGenerator;
+using RunGenerator;
 
 
-Console.WriteLine("Hello world");
+Console.WriteLine("Application is running...");
 
 GeneratedRuns.Day4RunB();
+
+GeneratedBenchmarks.Day4RunB();
 
 //BenchmarkRunner.Run<Day6Benchmark>();

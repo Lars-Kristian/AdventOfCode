@@ -1,11 +1,12 @@
 ﻿using App.Common;
-using RunsGenerator;
+using BenchmarkGenerator;
+using RunGenerator;
 
 namespace App.Day4;
 
 public static class Day4
 {
-    [GenerateRunWithData("Day4/Day4.input")]
+    [GenerateRun("Day4/Day4.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
         var result = 0;
@@ -38,8 +39,8 @@ public static class Day4
         return result;
     }
     
-    [GenerateBenchmark]
-    [GenerateRunWithData("Day4/Day4.input")]
+    [GenerateBenchmark("Day4/Day4.input")]
+    [GenerateRun("Day4/Day4.input")]
     public static int RunB(ReadOnlySpan<char> data)
     {
         var result = 0;
