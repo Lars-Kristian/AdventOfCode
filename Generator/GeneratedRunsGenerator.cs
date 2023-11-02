@@ -7,32 +7,31 @@ using Microsoft.CodeAnalysis.Text;
 //Code is created with the help of Andrew Lock's blog https://andrewlock.net/creating-a-source-generator-part-1-creating-an-incremental-source-generator/
 
 [Generator]
-public class RunWithDataGenerator : IIncrementalGenerator
+public class GeneratedRunsGenerator : IIncrementalGenerator
 {
+    private static string _className = "GeneratedRuns";
+    
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        Console.WriteLine("Hello from RunWithDataGenerator");
         // Add the marker attribute to the compilation
         context.RegisterPostInitializationOutput(ctx => ctx.AddSource(
-            "RunWithDataAttribute.g.cs",
-            SourceText.From(RunWithDataGeneratorSource.Attribute, Encoding.UTF8)));
+            "GenerateRunWithDataAttribute.g.cs",
+            SourceText.From(GenerateRunWithDataAttributeSource.Attribute, Encoding.UTF8)));
 
         // Do a simple filter for enums
         var methodDeclarations = context.SyntaxProvider
             .CreateSyntaxProvider<MethodDeclarationSyntax>(
-                predicate: static (s, _) => IsSyntaxTargetForGeneration(s), // select enums with attributes
-                transform: static (ctx, _) =>
-                    GetSemanticTargetForGeneration(ctx)) // sect the enum with the [EnumExtensions] attribute
-            .Where(static m => m is not null)!; // filter out attributed enums that we don't care about
+                predicate: static (s, _) => IsSyntaxTargetForGeneration(s),
+                transform: static (ctx, _) => GetSemanticTargetForGeneration(ctx))
+            .Where(static m => m is not null);
 
         // Combine the selected enums with the `Compilation`
-        IncrementalValueProvider<(Compilation, ImmutableArray<MethodDeclarationSyntax>)> compilationAndEnums
-            = context.CompilationProvider.Combine(methodDeclarations.Collect());
+        var incrementalValueProvider = context.CompilationProvider.Combine(methodDeclarations.Collect());
 
 
         // Generate the source using the compilation and enums
-        context.RegisterSourceOutput(compilationAndEnums,
-            static (spc, source) => Execute(source.Item1, source.Item2, spc));
+        context.RegisterSourceOutput(incrementalValueProvider,
+            static (sourceProductionContext, source) => Execute(source.Left, source.Right, sourceProductionContext));
     }
 
     private static bool IsSyntaxTargetForGeneration(SyntaxNode node)
@@ -59,7 +58,7 @@ public class RunWithDataGenerator : IIncrementalGenerator
                 var fullName = attributeSymbol.ContainingType.ToDisplayString();
 
                 // Is the attribute the [EnumExtensions] attribute?
-                if (fullName == "RunWithDataAttribute")
+                if (fullName == "RunsGenerator.GenerateRunWithDataAttribute")
                 {
                     return methodDeclarationSyntax;
                 }
@@ -70,7 +69,8 @@ public class RunWithDataGenerator : IIncrementalGenerator
     }
 
 
-    static void Execute(Compilation compilation, ImmutableArray<MethodDeclarationSyntax> methods,
+    static void Execute(Compilation compilation, 
+        ImmutableArray<MethodDeclarationSyntax> methods,
         SourceProductionContext context)
     {
         if (methods.IsDefaultOrEmpty) return;
@@ -88,7 +88,7 @@ public class RunWithDataGenerator : IIncrementalGenerator
         {
             // generate the source code and add it to the output
             string result = GenerateRunMethod(methodToGenerates);
-            context.AddSource("GeneratedRunMethods.g.cs", SourceText.From(result, Encoding.UTF8));
+            context.AddSource($"{_className}.g.cs", SourceText.From(result, Encoding.UTF8));
         }
     }
 
@@ -98,7 +98,7 @@ public class RunWithDataGenerator : IIncrementalGenerator
         // Create a list to hold our output
         var methodToGenerateList = new List<MethodToGenerate>();
         // Get the semantic representation of our marker attribute 
-        INamedTypeSymbol? enumAttribute = compilation.GetTypeByMetadataName("RunWithDataAttribute");
+        INamedTypeSymbol? enumAttribute = compilation.GetTypeByMetadataName("RunsGenerator.GenerateRunWithDataAttribute");
 
         if (enumAttribute == null) return methodToGenerateList;
 
@@ -114,11 +114,12 @@ public class RunWithDataGenerator : IIncrementalGenerator
             {
                 continue;
             }
-
+            
             var attributeArgument = GetAttributeConstructorArgument(enumAttribute, typeSymbol.GetAttributes());
             methodToGenerateList.Add(new MethodToGenerate(
                 typeSymbol.ContainingType.ToString(), 
-                typeSymbol.Name, 
+                typeSymbol.ContainingType.Name,
+                typeSymbol.Name,
                 attributeArgument));
 
             // Get the full type name of the enum e.g. Colour, 
@@ -148,12 +149,15 @@ public class RunWithDataGenerator : IIncrementalGenerator
 
     public class MethodToGenerate
     {
-        public MethodToGenerate(string methodNamespace, string methodName, string? attributeArgument)
+        public MethodToGenerate(string methodNamespace, string methodParent, string methodName, string attributeArgument)
         {
             MethodNamespace = methodNamespace;
+            MethodParent = methodParent;
             MethodName = methodName;
             AttributeArgument = attributeArgument;
         }
+
+        public string MethodParent { get; set; }
 
         public string MethodNamespace { get; set; }
 
@@ -228,12 +232,13 @@ public class RunWithDataGenerator : IIncrementalGenerator
         var sb = new StringBuilder();
         sb.Append(@"using System.Diagnostics;
 
-public class GeneratedRunMethods
+public class "); sb.Append(_className); sb.Append(@"
 {");
         foreach (var methodToGenerate in methodToGenerates)
         {
+            var debug = methodToGenerate.MethodParent;
             sb.Append(@"
-    public static void GeneratedRunFor"); sb.Append(methodToGenerate.MethodName); sb.Append(@"()
+    public static void "); sb.Append(methodToGenerate.MethodParent); sb.Append(methodToGenerate.MethodName); sb.Append(@"()
     {
         var sw = Stopwatch.StartNew();
         var text = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), """);
@@ -258,17 +263,19 @@ public class GeneratedRunMethods
     }
 }
 
-public static class RunWithDataGeneratorSource
+public static class GenerateRunWithDataAttributeSource
 {
-    public const string Attribute = @"
-[AttributeUsage(System.AttributeTargets.Method)]
-public class RunWithDataAttribute : Attribute
+    public const string Attribute = @"namespace RunsGenerator
 {
-    public string Path { get; }
-
-    public RunWithDataAttribute(string path)
+    [AttributeUsage(System.AttributeTargets.Method)]
+    public class GenerateRunWithDataAttribute : Attribute
     {
-        Path = path;
+        public string Path { get; }
+
+        public GenerateRunWithDataAttribute(string path)
+        {
+            Path = path;
+        }
     }
 }";
 }
