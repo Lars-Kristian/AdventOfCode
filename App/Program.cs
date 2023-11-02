@@ -25,7 +25,7 @@ var modeSetup = new Dictionary<Modes, Action>()
         {
             var sw = Stopwatch.StartNew();
             var text = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Day4/Day4.input"));
-            Console.WriteLine(Day4.RunBTest(text));
+            Console.WriteLine(Day4.RunB(text));
             sw.Stop();
             Console.WriteLine($"Time used {sw.ElapsedMilliseconds}ms");
         }
@@ -35,14 +35,6 @@ var modeSetup = new Dictionary<Modes, Action>()
         () => { BenchmarkRunner.Run<Day4Benchmark>(); }
     },
 };
-
-var assembly = Assembly.GetEntryAssembly();
-var methods = assembly?.GetTypes()
-                      .SelectMany(t => t.GetMethods())
-                      .Where(m => m.GetCustomAttributes(typeof(InputPathAttribute), false).Length > 0)
-                      .ToArray();
-
-var debug = "";
 
 /*
 var modes = new List<Action>()
@@ -59,9 +51,11 @@ var modes = new List<Action>()
 };
 */
 
-HelloWorldGenerated.HelloWorld.SayHello();
+//HelloWorldGenerated.HelloWorld.SayHello();
 
 modeSetup[Modes.Day4B]();
+
+GeneratedRunMethods.GeneratedRunForRunB();
 
 public enum Modes
 {

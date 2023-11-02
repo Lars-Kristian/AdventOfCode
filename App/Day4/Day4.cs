@@ -4,6 +4,7 @@ namespace App.Day4;
 
 public static class Day4
 {
+    [RunWithData("Day4/Day4.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
         var result = 0;
