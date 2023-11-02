@@ -1,5 +1,6 @@
-
+using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 
 [Generator]
 public class RunGenerator : ISourceGenerator
@@ -11,6 +12,5 @@ public class RunGenerator : ISourceGenerator
 
     public void Initialize(GeneratorInitializationContext context)
     {
-        
     }
 }

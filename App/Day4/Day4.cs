@@ -37,7 +37,7 @@ public static class Day4
     }
     
     [GenerateBenchmark]
-    [InputPath("Day4/Day4.input")]
+    [RunWithData("Day4/Day4.input")]
     public static int RunB(ReadOnlySpan<char> data)
     {
         var result = 0;
