@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using App.Common;
 using RunGenerator;
 
@@ -14,7 +15,7 @@ public static class Day5
         var boxCount = 0;
         for (var i = 1; i < drawing.Length; i += 1)
         {
-            if (drawing[i] >= 'A' && drawing[i] <= 'Z') boxCount += 1;
+            if (!(drawing[i] < 'A' || drawing[i] > 'Z')) boxCount += 1;
         }
         
         var stackCount = 0;
@@ -84,6 +85,7 @@ public static class Day5
         return result;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void PushCrate(Span<char> state, Span<int> cursors, int cursorIndex, char crate, int width)
     {
         var indexInState = width * cursorIndex + cursors[cursorIndex];
@@ -91,6 +93,7 @@ public static class Day5
         cursors[cursorIndex] += 1;
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static char PopCrate(Span<char> state, Span<int> cursors, int cursorIndex, int width)
     {
         var indexInState = width * cursorIndex + cursors[cursorIndex] - 1;
@@ -98,18 +101,3 @@ public static class Day5
         return state[indexInState];
     }
 }
-
-/*
-    [W]         [J]     [J]
-    [V]     [F] [F] [S] [S]
-    [S] [M] [R] [W] [M] [C]
-    [M] [G] [W] [S] [F] [G]     [C]
-[W] [P] [S] [M] [H] [N] [F]     [L]
-[R] [H] [T] [D] [L] [D] [D] [B] [W]
-[T] [C] [L] [H] [Q] [J] [B] [T] [N]
-[G] [G] [C] [J] [P] [P] [Z] [R] [H]
- 1   2   3   4   5   6   7   8   9
-*/
-
-//maybe count width and height -> faster
-//3 11 17 24 32 41 50 59

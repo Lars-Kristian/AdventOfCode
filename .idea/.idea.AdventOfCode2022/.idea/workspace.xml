@@ -10,10 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/TestDay5.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day5/Day5.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
       <workItem from="1698844677412" duration="746000" />
       <workItem from="1698906261184" duration="12572000" />
       <workItem from="1698931439210" duration="1920000" />
-      <workItem from="1698933451715" duration="14738000" />
+      <workItem from="1698933451715" duration="16273000" />
     </task>
     <servers />
   </component>
@@ -133,29 +131,16 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/App/Program.cs</url>
-          <line>22</line>
+          <line>23</line>
           <properties documentPath="C:\Work\AdventOfCode\App\Program.cs" initialLine="14" containingFunctionPresentation="">
             <startOffsets>
-              <option value="570" />
+              <option value="572" />
             </startOffsets>
             <endOffsets>
-              <option value="570" />
+              <option value="572" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/App/Day5/Day5.cs</url>
-          <line>83</line>
-          <properties documentPath="C:\Work\AdventOfCode\App\Day5\Day5.cs" initialLine="20" containingFunctionPresentation="Method 'RunA'">
-            <startOffsets>
-              <option value="2758" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2772" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
