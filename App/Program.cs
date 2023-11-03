@@ -8,17 +8,5 @@ using RunGenerator;
 
 Console.WriteLine("Application is running...");
 
-
-//GeneratedBenchmarks.Day4RunB();
-
-//GeneratedRuns.Day5RunA();
-BenchmarkRunner.Run<Day5Benchmark>();
-
-
-//var summaries = BenchmarkSwitcher.FromTypes(new[] { typeof(Day6Benchmark) }).Run(null, new DebugInProcessConfig());
-/*
-static void Main(string[] args) => BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
-Main(new string[0]);
-*/
-
-//var debug = "";
+//GeneratedRuns.Day5RunB();
+BenchmarkRunner.Run<Day5RunBBenchmark>();

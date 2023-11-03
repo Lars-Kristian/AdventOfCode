@@ -10,8 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/App/Day5/Day5RunBBenchmark.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Day5/Day5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day5/Day5.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5Benchmark.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day5/Day5RunABenchmark.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5RunABenchmarkResult.md" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day5/Day5RunABenchmarkResult.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestDay5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestDay5.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +120,7 @@
       <workItem from="1698844677412" duration="746000" />
       <workItem from="1698906261184" duration="12572000" />
       <workItem from="1698931439210" duration="1920000" />
-      <workItem from="1698933451715" duration="16273000" />
+      <workItem from="1698933451715" duration="17901000" />
     </task>
     <servers />
   </component>
@@ -127,23 +132,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/App/Program.cs</url>
-          <line>23</line>
-          <properties documentPath="C:\Work\AdventOfCode\App\Program.cs" initialLine="14" containingFunctionPresentation="">
-            <startOffsets>
-              <option value="572" />
-            </startOffsets>
-            <endOffsets>
-              <option value="572" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#Microsoft.CodeAnalysis.IncrementalValueProvider`1" memberName="Node" />

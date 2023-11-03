@@ -7,8 +7,8 @@ Toolchain=InProcessNoEmitToolchain
 
 | Method               | Mean     | Error    | StdDev   | Gen0   | Gen1   | Allocated |
 |--------------------- |---------:|---------:|---------:|-------:|-------:|----------:|
-| LogicOnly            | 22.83 us | 0.288 us | 0.269 us | 0.0610 |      - |     504 B |
-| LogicAndReadFromDisk | 86.02 us | 1.004 us | 0.939 us | 9.6436 | 0.9766 |   61192 B |
+| LogicOnly            | 22.21 us | 0.144 us | 0.135 us | 0.0610 |      - |     504 B |
+| LogicAndReadFromDisk | 84.48 us | 1.050 us | 0.876 us | 9.6436 | 0.9766 |   61192 B |
 
 
 BenchmarkDotNet v0.13.9+228a464e8be6c580ad9408e98f18813f6407fb5a, Windows 11 (10.0.22621.2428/22H2/2022Update/SunValley2)

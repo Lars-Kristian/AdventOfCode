@@ -5,7 +5,7 @@ namespace App.Day5;
 
 [Config(typeof(AntiVirusFriendlyConfig))]
 [MemoryDiagnoser]
-public class Day5Benchmark
+public class Day5RunABenchmark
 {
     private string Text { get; } = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Day5/Day5.input"));
 
