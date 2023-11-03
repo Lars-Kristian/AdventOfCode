@@ -1,0 +1,11 @@
+BenchmarkDotNet v0.13.9+228a464e8be6c580ad9408e98f18813f6407fb5a, Windows 10 (10.0.19044.3570/21H2/November2021Update)
+Intel Core i7-9850H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
+.NET SDK 7.0.304
+[Host] : .NET 7.0.7 (7.0.723.27404), X64 RyuJIT AVX2
+
+Toolchain=InProcessNoEmitToolchain
+
+| Method               | Mean      | Error    | StdDev   | Gen0   | Gen1   | Allocated |
+|--------------------- |----------:|---------:|---------:|-------:|-------:|----------:|
+| LogicOnly            |  46.44 us | 0.186 us | 0.165 us |      - |      - |         - |
+| LogicAndReadFromDisk | 110.98 us | 1.022 us | 0.906 us | 9.6436 | 1.0986 |   60672 B |

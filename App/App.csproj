@@ -5,6 +5,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <!--PublishAot>true</PublishAot-->
     </PropertyGroup>
 
@@ -22,6 +23,10 @@
       <EmbeddedResource Include="Day5\Day5.input">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Day8\Day8.input" />
+      <EmbeddedResource Include="Day8\Day8.input">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -32,6 +37,7 @@
         <ProjectReference Include="..\Generator\Generator.csproj"
                           OutputItemType="Analyzer"
                           ReferenceOutputAssembly="false"
+
                           SetTargetFramework="TargetFramework=netstandard2.0"/>
     </ItemGroup>
 
