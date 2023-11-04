@@ -10,13 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Day8/Day8.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Day8/Day8RunABenchmark.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Day8/Day8RunABenchmarkResults.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/TestDay8.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Day8/Day8RunBBenchmark.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day8/Day8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day8/Day8.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/TestDay8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestDay8.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +25,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
@@ -59,6 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.71630096",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Work/AdventOfCode/AdventOfCode2022.sln",
@@ -125,6 +128,7 @@
       <workItem from="1698906261184" duration="12572000" />
       <workItem from="1698931439210" duration="1920000" />
       <workItem from="1698933451715" duration="24848000" />
+      <workItem from="1699093590997" duration="3441000" />
     </task>
     <servers />
   </component>
@@ -136,23 +140,6 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/App/Day8/Day8.cs</url>
-          <line>70</line>
-          <properties documentPath="C:\Work\AdventOfCode\App\Day8\Day8.cs" initialLine="12" containingFunctionPresentation="Method 'RunA'">
-            <startOffsets>
-              <option value="2054" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2070" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#Microsoft.CodeAnalysis.IncrementalValueProvider`1" memberName="Node" />

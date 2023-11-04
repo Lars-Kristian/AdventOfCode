@@ -9,5 +9,5 @@ using RunGenerator;
 
 Console.WriteLine("Application is running...");
 
-//GeneratedRuns.Day8RunA();
-BenchmarkRunner.Run<Day8RunABenchmark>();
+GeneratedRuns.Day8RunA();
+//BenchmarkRunner.Run<Day8RunBBenchmark>();

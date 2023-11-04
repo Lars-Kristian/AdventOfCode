@@ -66,4 +66,148 @@ public static class Day8
         return result;
     }
     
+    
+    [GenerateRun("Day8/Day8.input")]
+    public static long RunB(ReadOnlySpan<char> data)
+    {
+        var width = data.IndexOf('\n');
+        var height = data.Length / (width + 1);
+
+        Span<long> state = stackalloc long[width * height];
+        state.Fill(1);
+        
+        for (var y = 1; y < height - 1; y++)
+        {
+            for (var x = 1; x < width - 1; x++)
+            {
+                var treeHeight = data[y * (width + 1) + x];
+
+                var done = false;
+
+                for (var i = x + 1; i < width; i++)
+                {
+                    if (data[y * (width + 1) + i] < treeHeight) continue;
+                    
+                    state[y * width + x] *= i - x;
+                    done = true;
+                    break;
+                }
+
+                if (!done) state[y * width + x] *= width - 1 - x;
+
+                done = false;
+                for (var i = x - 1; i >= 0; i--)
+                {
+                    if (data[y * (width + 1) + i] < treeHeight) continue;
+                    
+                    state[y * width + x] *= x - i;
+                    done = true;
+                    break;
+                }
+                
+                if (!done) state[y * width + x] *= x;
+                done = false;
+                
+                for (var i = y + 1; i < height; i++)
+                {
+                    if (data[i * (width + 1) + x] < treeHeight) continue;
+                    
+                    state[y * width + x] *= i - y;
+                    done = true;
+                    break;
+                }
+                
+                if (!done) state[y * width + x] *= height - 1 - y;
+                done = false;
+                
+                for (var i = y - 1; i >= 0; i--)
+                {
+                    if (data[i * (width + 1) + x] < treeHeight) continue;
+                    
+                    state[y * width + x] *= y - i;
+                    done = true;
+                    break;
+                }
+                
+                if (!done) state[y * width + x] *= y;
+            }  
+        }
+
+        long result = 0;
+        for (var i = 0; i < state.Length; i++)
+        {
+            result = state[i] > result ? state[i] : result;
+        }
+        
+        return result;
+    }
+
+        [GenerateRun("Day8/Day8.input")]
+    public static long RunB2(ReadOnlySpan<char> data)
+    {
+        var width = data.IndexOf('\n');
+        var height = data.Length / (width + 1);
+
+        Span<long> state = stackalloc long[width * height];
+        state.Fill(1);
+        
+        for (var y = 1; y < height - 1; y++)
+        {
+            for (var x = 1; x < width - 1; x++)
+            {
+                var treeHeight = data[y * (width + 1) + x];
+
+                var view = 0;
+                for (var i = x + 1; i < width; i++)
+                {
+                    view += 1;
+                    if (data[y * (width + 1) + i] < treeHeight) continue;
+                    break;
+                }
+
+                state[y * width + x] *= view;
+
+                
+                view = 0;
+                for (var i = x - 1; i >= 0; i--)
+                {
+                    view += 1;
+                    if (data[y * (width + 1) + i] < treeHeight) continue;
+                    break;
+                }
+                
+                state[y * width + x] *= view;
+                
+                
+                view = 0;
+                for (var i = y + 1; i < height; i++)
+                {
+                    view += 1;
+                    if (data[i * (width + 1) + x] < treeHeight) continue;
+                    break;
+                }
+                
+                state[y * width + x] *= view;
+                
+                view = 0;
+                for (var i = y - 1; i >= 0; i--)
+                {
+                    view += 1;
+                    if (data[i * (width + 1) + x] < treeHeight) continue;
+                    break;
+                }
+                
+                state[y * width + x] *= view;
+            }  
+        }
+
+        long result = 0;
+        for (var i = 0; i < state.Length; i++)
+        {
+            result = state[i] > result ? state[i] : result;
+        }
+        
+        return result;
+    }
+
 }
