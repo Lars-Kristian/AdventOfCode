@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
+using BenchmarkGenerator;
 using RunGenerator;
 
 namespace App.Day6;
 
 public static class Day6
 {
+    [GenerateBenchmark("Day6/Day6.input")]
     [GenerateRun("Day6/Day6.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
@@ -32,6 +34,7 @@ public static class Day6
         return -1;
     }
 
+    [GenerateBenchmark("Day6/Day6.input")]
     [GenerateRun("Day6/Day6.input")]
     public static int RunB(ReadOnlySpan<char> data)
     {

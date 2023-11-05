@@ -1,10 +1,12 @@
 ﻿using System.Buffers;
+using BenchmarkGenerator;
 using RunGenerator;
 
 namespace App.Day8;
 
 public static class Day8
 {
+    [GenerateBenchmark("Day8/Day8.input")]
     [GenerateRun("Day8/Day8.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
@@ -68,14 +70,15 @@ public static class Day8
     }
 
 
+    [GenerateBenchmark("Day8/Day8.input")]
     [GenerateRun("Day8/Day8.input")]
     public static long RunB(ReadOnlySpan<char> data)
     {
         var width = data.IndexOf('\n');
         var height = data.Length / (width + 1);
 
-        Span<long> state = stackalloc long[width * height];
-        state.Fill(1);
+        var state = ArrayPool<int>.Shared.Rent(width * height);
+        state.AsSpan().Fill(1);
 
         for (var y = 1; y < height - 1; y++)
         {
@@ -134,13 +137,7 @@ public static class Day8
             }
         }
 
-        long result = 0;
-        for (var i = 0; i < state.Length; i++)
-        {
-            result = state[i] > result ? state[i] : result;
-        }
-
-        return result;
+        return state.Max();;
     }
 
     [GenerateRun("Day8/Day8.input")]

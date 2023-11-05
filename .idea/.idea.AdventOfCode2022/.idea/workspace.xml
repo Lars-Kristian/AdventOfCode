@@ -11,10 +11,17 @@
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day4/Day4.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day4/Day4.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day4/Day4Benchmark.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day5/Day5.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5RunABenchmark.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day5/Day5RunBBenchmark.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day6/Day6.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day6/Day6.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day6/Day6Benchmark.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Day8/Day8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day8/Day8.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Day8/Day8RunBBenchmark.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day8/Day8RunBBenchmark.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Day8/Day8RunABenchmark.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/TestDay8.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/TestDay8.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Generator/BenchmarkGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Generator/BenchmarkGenerator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +32,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/94DE451FD0CD571EAF3C3623/Generator/Generator.BenchmarkGenerator/GeneratedBenchmarks.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/212a5a3b6c113eee85bc56ddfc6f5671f61af8418405218edee82bf8adfa7/SpanHelpers.T.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/213c4022a1c71e8e20f4b5369a75b4213a8fca817449f2e45753d4eb13fcf3cb/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/21f3fa85bb30cfbdbcac964876348b7b5a07bba446f9dd9f6acd4bd54879fb/Popcnt.cs" root0="SKIP_HIGHLIGHTING" />
@@ -126,7 +134,7 @@
       <workItem from="1698931439210" duration="1920000" />
       <workItem from="1698933451715" duration="24848000" />
       <workItem from="1699093590997" duration="4131000" />
-      <workItem from="1699174768489" duration="5757000" />
+      <workItem from="1699174768489" duration="8000000" />
     </task>
     <servers />
   </component>

@@ -1,11 +1,13 @@
 using System.Runtime.CompilerServices;
 using App.Common;
+using BenchmarkGenerator;
 using RunGenerator;
 
 namespace App.Day5;
 
 public static class Day5
 {
+    [GenerateBenchmark("Day5/Day5.input")]
     [GenerateRun("Day5/Day5.input")]
     public static string RunA(ReadOnlySpan<char> data)
     {
@@ -101,6 +103,7 @@ public static class Day5
         return state[indexInState];
     }
     
+    [GenerateBenchmark("Day5/Day5.input")]
     [GenerateRun("Day5/Day5.input")]
     public static string RunB(ReadOnlySpan<char> data)
     {

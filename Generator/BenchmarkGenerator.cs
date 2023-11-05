@@ -71,7 +71,7 @@ public class BenchmarkGenerator : IIncrementalGenerator
 
         if (methodToGenerates.Count < 0) return;
 
-        string result = BenchmarkSourceUtil.GetSource(methodToGenerates, Namespace, ClassName);
+        string result = BenchmarkSourceUtil.GetSource2(methodToGenerates, Namespace, ClassName);
         context.AddSource($"{ClassName}.g.cs", SourceText.From(result, Encoding.UTF8));
     }
 
@@ -223,6 +223,50 @@ public class "); sb.Append(className); sb.Append(@"
         } 
         sb.Append(@"
 }");
+        return sb.ToString();
+    }
+
+    public static string GetSource2(List<MethodToGenerate> methodToGenerates, string nameSpace, string className)
+    {
+        var sb = new StringBuilder();
+
+        sb.Append(@"using BenchmarkDotNet.Attributes;
+using App.Common;
+
+namespace "); sb.Append(nameSpace); sb.Append(@";
+
+public class "); sb.Append(className); sb.Append(@"
+{");
+        foreach (var method in methodToGenerates)
+        {
+            sb.Append(@"
+    [Config(typeof(AntiVirusFriendlyConfig))]
+    [MemoryDiagnoser]
+    public class "); sb.Append(method.MethodParent); sb.Append(method.MethodName); sb.Append(@"Benchmark
+    {
+        private string Text { get; } = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), """); sb.Append(method.AttributeArgument);
+                sb.Append(@"""));
+
+        [Benchmark]
+        public void LogicOnly()
+        {
+            "); sb.Append(method.MethodNamespace); sb.Append("."); sb.Append(method.MethodName);
+                sb.Append(@"(Text.AsSpan());
+        }
+        
+        [Benchmark]
+        public void LogicAndReadFromDisk()
+        {
+            "); sb.Append(method.MethodNamespace); sb.Append("."); sb.Append(method.MethodName);
+                sb.Append(@"(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), """);
+                sb.Append(method.AttributeArgument);sb.Append(@""")));
+        }
+    }
+
+");
+        }
+
+        sb.Append(@"}");
         return sb.ToString();
     }
 }

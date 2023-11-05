@@ -6,6 +6,7 @@ namespace App.Day4;
 
 public static class Day4
 {
+    [GenerateBenchmark("Day4/Day4.input")]
     [GenerateRun("Day4/Day4.input")]
     public static int RunA(ReadOnlySpan<char> data)
     {
