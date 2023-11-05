@@ -12,12 +12,12 @@ public class Day8RunBBenchmark
     [Benchmark]
     public void LogicOnly()
     {
-        Day8.RunB(Text.AsSpan());
+        Day8.RunB2(Text);
     }
     
     [Benchmark]
     public void LogicAndReadFromDisk()
     {
-        Day8.RunB(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Day8/Day8.input")));
+        Day8.RunB2(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Day8/Day8.input")));
     }
 }

@@ -22,7 +22,7 @@ public static class TestDay8
         public void ReturnExpectedResult()
         {
             var input = "30373\n25512\n65332\n33549\n35390\n";
-            var result = Day8.RunB(input);
+            var result = Day8.RunB2(input);
             result.Should().Be(8);
         }
     }
