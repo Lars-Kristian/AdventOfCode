@@ -11,10 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/2023/App/Common/AntiVirusFriendlyConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/App.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,7 +169,7 @@
       <workItem from="1699174768489" duration="25753000" />
       <workItem from="1699614399673" duration="1263000" />
       <workItem from="1700137900750" duration="661000" />
-      <workItem from="1701423044973" duration="3714000" />
+      <workItem from="1701423044973" duration="6136000" />
     </task>
     <servers />
   </component>
@@ -183,6 +181,23 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/2023/App/Day1/Day1.cs</url>
+          <line>56</line>
+          <properties documentPath="C:\Work\AdventOfCode\2023\App\Day1\Day1.cs" initialLine="56" containingFunctionPresentation="Method 'RunA2'">
+            <startOffsets>
+              <option value="1260" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1282" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#Microsoft.CodeAnalysis.IncrementalValueProvider`1" memberName="Node" />

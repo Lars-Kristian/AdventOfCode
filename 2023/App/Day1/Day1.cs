@@ -5,46 +5,54 @@ namespace App.Day1;
 
 public static class Day1
 {
+
     [GenerateBenchmark("Day1/Day1.input")]
     [GenerateRun("Day1/Day1.input")]
     public static int RunA(ReadOnlySpan<char> input)
     {
         var result = 0;
 
-        var firstIndex = 0;
-        var last_index = 0;
+        var firstIndex = -1;
+        var lastIndex = -1;
 
-        for (var i = 0; i < input.Length; i++)
+        while (!input.IsEmpty)
         {
-            var c = input[i];
-            if (c >= '0' && c <= '9')
+            var tokenIndex = input.IndexOf('\n');
+            var line = input.Slice(0, tokenIndex);
+
+            for (var i = 0; i < line.Length; i++)
             {
-                if (firstIndex == 0)
+                if (line[i] >= '0' && line[i] <= '9')
                 {
                     firstIndex = i;
-                    last_index = i;
-                }
-                else
-                {
-                    last_index = i;
+                    break;
                 }
             }
-
-            if (c == '\n' && firstIndex != 0)
+            
+            for (var i = line.Length - 1; i >= 0; i--)
             {
-                var a = input[firstIndex] - '0';
-                var b = input[last_index] - '0';
-
-                result += a * 10 + b;
-
-                firstIndex = 0;
-                last_index = 0;
+                if (line[i] >= '0' && line[i] <= '9')
+                {
+                    lastIndex = i;
+                    break;
+                }
             }
+
+            var a = line[firstIndex] - '0';
+            var b = line[lastIndex] - '0';
+
+            result += a * 10 + b;
+
+            firstIndex = -1;
+            lastIndex = -1;
+            
+            input = input.Slice(line.Length + 1);
         }
 
         return result;
     }
 
+    
     [GenerateBenchmark("Day1/Day1.input")]
     [GenerateRun("Day1/Day1.input")]
     public static int RunB(ReadOnlySpan<char> input)
