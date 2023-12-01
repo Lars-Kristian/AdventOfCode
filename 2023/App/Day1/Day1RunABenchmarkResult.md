@@ -11,22 +11,6 @@ Toolchain=InProcessNoEmitToolchain
 | LogicAndReadFromDisk | 89.78 us | 0.630 us | 0.558 us | 15.9912 | 2.5635 |  101123 B |
 
 
-
-
-BenchmarkDotNet v0.13.9+228a464e8be6c580ad9408e98f18813f6407fb5a, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2)
-AMD Ryzen 7 7800X3D, 1 CPU, 16 logical and 8 physical cores
-.NET SDK 8.0.100-rc.2.23502.2
-  [Host] : .NET 8.0.0 (8.0.23.47906), X64 RyuJIT AVX2
-
-Toolchain=InProcessNoEmitToolchain
-
-| Method               | Mean     | Error    | StdDev   | Median   | Gen0   | Gen1   | Allocated |
-|--------------------- |---------:|---------:|---------:|---------:|-------:|-------:|----------:|
-| LogicOnly            | 15.60 us | 0.312 us | 0.788 us | 16.00 us |      - |      - |         - |
-| LogicAndReadFromDisk | 43.39 us | 0.144 us | 0.127 us | 43.41 us | 2.0142 | 0.3052 |  103120 B |
-
-
-
 BenchmarkDotNet v0.13.9+228a464e8be6c580ad9408e98f18813f6407fb5a, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2)
 AMD Ryzen 7 7800X3D, 1 CPU, 16 logical and 8 physical cores
 .NET SDK 8.0.100

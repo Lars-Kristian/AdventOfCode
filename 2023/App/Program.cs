@@ -1,9 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using BenchmarkDotNet.Running;
 
-using BenchmarkDotNet.Running;
+Console.WriteLine("Application starting...");
 
-Console.WriteLine("Hello, World!");
+//RunGenerator.GeneratedRuns.Day1RunB();
 
-//RunGenerator.GeneratedRuns.Day1RunB3();
-
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day1RunB3Benchmark>();
+BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day1RunBBenchmark>();
