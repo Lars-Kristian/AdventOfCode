@@ -11,14 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Visualization/Easings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualization/Global.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Visualization/Text.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/App/Common/AntiVirusFriendlyConfig.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Day4/Day4.cs" beforeDir="false" afterPath="$PROJECT_DIR$/App/Day4/Day4.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualization/AnimationState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Visualization/AnimationState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualization/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Visualization/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visualization/Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Visualization/Util.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/App.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +77,25 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Visualization">
+  <component name="RunManager" selected=".NET Project.App-2023">
+    <configuration name="App-2023" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/2023/App/bin/Debug/net7.0/App.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/2023/App/bin/Debug/net7.0" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/2023/App/App.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="net7.0" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="App" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -100,9 +115,9 @@
       </method>
     </configuration>
     <configuration name="Visualization" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Visualization/bin/Debug/net7.0/Visualization.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Visualization/bin/Debug/net7.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -112,7 +127,7 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net7.0" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -132,6 +147,12 @@
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.Generator: Generators" />
+      <item itemvalue=".NET Project.App-2023" />
+      <item itemvalue=".NET Project.App" />
+      <item itemvalue=".NET Project.Visualization" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -150,6 +171,7 @@
       <workItem from="1699174768489" duration="25753000" />
       <workItem from="1699614399673" duration="1263000" />
       <workItem from="1700137900750" duration="661000" />
+      <workItem from="1701423044973" duration="3714000" />
     </task>
     <servers />
   </component>
