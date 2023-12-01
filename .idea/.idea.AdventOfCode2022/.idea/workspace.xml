@@ -12,9 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1RunABenchmarkResult.md" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1RunABenchmarkResult.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1RunBBenchmarkResult.md" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1RunBBenchmarkResult.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/D7530D8EA671059018022E97/Generator/Generator.BenchmarkGenerator/GeneratedBenchmarks.g.cs" root0="FORCE_HIGHLIGHTING" />
@@ -72,9 +72,9 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\ljo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\ljo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\ljo\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\Lars-Kristian\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Lars-Kristian\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Lars-Kristian\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -174,6 +174,7 @@
       <workItem from="1700137900750" duration="661000" />
       <workItem from="1701423044973" duration="6807000" />
       <workItem from="1701430920554" duration="7059000" />
+      <workItem from="1701440281722" duration="382000" />
     </task>
     <servers />
   </component>
