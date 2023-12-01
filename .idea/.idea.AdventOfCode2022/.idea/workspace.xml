@@ -13,6 +13,7 @@
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1RunABenchmarkResult.md" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1RunABenchmarkResult.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2023/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +173,7 @@
       <workItem from="1699614399673" duration="1263000" />
       <workItem from="1700137900750" duration="661000" />
       <workItem from="1701423044973" duration="6807000" />
-      <workItem from="1701430920554" duration="5388000" />
+      <workItem from="1701430920554" duration="7059000" />
     </task>
     <servers />
   </component>

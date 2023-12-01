@@ -13,39 +13,34 @@ public static class Day1
     {
         var result = 0;
 
-        var firstIndex = -1;
-        var lastIndex = -1;
-
         while (!input.IsEmpty)
         {
+            var firstIndex = -1;
+            var lastIndex = -1;
+            
             var tokenIndex = input.IndexOf('\n');
             var line = input.Slice(0, tokenIndex);
 
             for (var i = 0; i < line.Length; i++)
             {
-                if (line[i] >= '0' && line[i] <= '9')
-                {
-                    firstIndex = i;
-                    break;
-                }
+                if (line[i] < '0' || line[i] > '9') continue;
+                
+                firstIndex = i;
+                break;
             }
             
             for (var i = line.Length - 1; i >= 0; i--)
             {
-                if (line[i] >= '0' && line[i] <= '9')
-                {
-                    lastIndex = i;
-                    break;
-                }
+                if (line[i] < '0' || line[i] > '9') continue;
+                
+                lastIndex = i;
+                break;
             }
 
             var a = line[firstIndex] - '0';
             var b = line[lastIndex] - '0';
 
             result += a * 10 + b;
-
-            firstIndex = -1;
-            lastIndex = -1;
             
             input = input.Slice(line.Length + 1);
         }
@@ -218,6 +213,7 @@ public static class Day1
     [GenerateRun("Day1/Day1.input")]
     public static int RunB3(ReadOnlySpan<char> input)
     {
+        /*Begin: Copy tokens to stack*/
         var tokenString = "one|two|three|four|five|six|seven|eight|nine";
         Span<char> span = stackalloc char[tokenString.Length];
         tokenString.AsSpan().CopyTo(span);
@@ -239,17 +235,15 @@ public static class Day1
                 prevWasDelimiter = false;
             }
 
-            if (span[i] == '|')
-            {
-                sliceLength[count] = i - prevIndex;
-                prevWasDelimiter = true;
-                count += 1;
-            }
+            if (span[i] != '|') continue;
+            
+            sliceLength[count] = i - prevIndex;
+            prevWasDelimiter = true;
+            count += 1;
         }
 
         sliceLength[sliceLength.Length - 1] = span.Length - prevIndex;
-
-        var test = span.Slice(sliceIndex[0], sliceLength[0]);
+        /*End: Copy tokens to stack*/
         
         Span<int> values = stackalloc int[]
         {
@@ -263,31 +257,31 @@ public static class Day1
             var tokenIndex = input.IndexOf('\n');
             var line = input.Slice(0, tokenIndex);
 
+            /*Begin: Same as part A*/
             var firstIndex = -1;
             var lastIndex = -1;
             
             for (var i = 0; i < line.Length; i++)
             {
-                if (line[i] >= '0' && line[i] <= '9')
-                {
-                    firstIndex = i;
-                    break;
-                }
+                if (line[i] < '0' || line[i] > '9') continue;
+                
+                firstIndex = i;
+                break;
             }
         
             for (var i = line.Length - 1; i >= 0; i--)
             {
-                if (line[i] >= '0' && line[i] <= '9')
-                {
-                    lastIndex = i;
-                    break;
-                }
+                if (line[i] < '0' || line[i] > '9') continue;
+                
+                lastIndex = i;
+                break;
             }
             
             var firstValue = line[firstIndex] - '0';
             var lastValue = line[lastIndex] - '0';
-
-            if (firstIndex > 2)
+            /*End: Same as part A*/
+            
+            if (firstIndex > 2) //Skip looking for words since "one" will not fit
             {
                 for (var i = 0; i < tokenCount; i++)
                 {
@@ -302,7 +296,7 @@ public static class Day1
                 }
             }
 
-            if (lastIndex < line.Length - 3)
+            if (lastIndex < line.Length - 3) //Skip looking for words since "one" will not fit
             {
                 for (var i = 0; i < tokenCount; i++)
                 {
