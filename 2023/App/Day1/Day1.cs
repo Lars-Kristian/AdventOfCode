@@ -213,4 +213,116 @@ public static class Day1
         return result;
     }
     
+    
+    [GenerateBenchmark("Day1/Day1.input")]
+    [GenerateRun("Day1/Day1.input")]
+    public static int RunB3(ReadOnlySpan<char> input)
+    {
+        var tokenString = "one|two|three|four|five|six|seven|eight|nine";
+        Span<char> span = stackalloc char[tokenString.Length];
+        tokenString.AsSpan().CopyTo(span);
+
+        var tokenCount = span.Count('|') + 1;
+
+        Span<int> sliceIndex = stackalloc int[tokenCount];
+        Span<int> sliceLength = stackalloc int[tokenCount];
+
+        var prevWasDelimiter = true;
+        var prevIndex = 0;
+        var count = 0;
+        for (var i = 0; i < span.Length; i++)
+        {
+            if (prevWasDelimiter)
+            {
+                sliceIndex[count] = i;
+                prevIndex = i;
+                prevWasDelimiter = false;
+            }
+
+            if (span[i] == '|')
+            {
+                sliceLength[count] = i - prevIndex;
+                prevWasDelimiter = true;
+                count += 1;
+            }
+        }
+
+        sliceLength[sliceLength.Length - 1] = span.Length - prevIndex;
+
+        var test = span.Slice(sliceIndex[0], sliceLength[0]);
+        
+        Span<int> values = stackalloc int[]
+        {
+            1,2,3,4,5,6,7,8,9
+        };
+
+        var result = 0;
+            
+        while (!input.IsEmpty)
+        {
+            var tokenIndex = input.IndexOf('\n');
+            var line = input.Slice(0, tokenIndex);
+
+            var firstIndex = -1;
+            var lastIndex = -1;
+            
+            for (var i = 0; i < line.Length; i++)
+            {
+                if (line[i] >= '0' && line[i] <= '9')
+                {
+                    firstIndex = i;
+                    break;
+                }
+            }
+        
+            for (var i = line.Length - 1; i >= 0; i--)
+            {
+                if (line[i] >= '0' && line[i] <= '9')
+                {
+                    lastIndex = i;
+                    break;
+                }
+            }
+            
+            var firstValue = line[firstIndex] - '0';
+            var lastValue = line[lastIndex] - '0';
+
+            if (firstIndex > 2)
+            {
+                for (var i = 0; i < tokenCount; i++)
+                {
+                    var index = line.IndexOf(span.Slice(sliceIndex[i], sliceLength[i]));
+                    if(index == -1) continue;
+                    if (index < firstIndex)
+                    {
+                        firstIndex = index;
+                        firstValue = values[i];
+                        if (index == 0) break;
+                    }
+                }
+            }
+
+            if (lastIndex < line.Length - 3)
+            {
+                for (var i = 0; i < tokenCount; i++)
+                {
+                    var index = line.LastIndexOf(span.Slice(sliceIndex[i], sliceLength[i]));
+                    if(index == -1) continue;
+                    if (index > lastIndex)
+                    {
+                        lastIndex = index;
+                        lastValue = values[i];
+                        if (index == line.Length - 1) break;
+                    }
+                }
+            }
+
+            result += firstValue * 10 + lastValue;
+
+            input = input.Slice(line.Length + 1);
+        }
+
+        return result;
+    }
+    
 }

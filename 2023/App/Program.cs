@@ -4,6 +4,6 @@ using BenchmarkDotNet.Running;
 
 Console.WriteLine("Hello, World!");
 
-//RunGenerator.GeneratedRuns.Day1RunB2();
+RunGenerator.GeneratedRuns.Day1RunB3();
 
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day1RunB2Benchmark>();
+//BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day1RunB3Benchmark>();
