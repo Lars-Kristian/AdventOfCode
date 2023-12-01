@@ -12,7 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ccf38db8-3523-4e51-a516-79e46898cadf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AdventOfCode2022/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2023/App/App.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/App.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Day1/Day1RunBBenchmarkResult.md" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Day1/Day1RunBBenchmarkResult.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2023/App/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/2023/App/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/213c4022a1c71e8e20f4b5369a75b4213a8fca817449f2e45753d4eb13fcf3cb/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/21f3fa85bb30cfbdbcac964876348b7b5a07bba446f9dd9f6acd4bd54879fb/Popcnt.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ce6f3f6fa1445829f697f026fd6d1e52ced3f7a5a58c29a56c34f5d4a00/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f39f483b372f43e1575cee51ed3349dabacca1d8d4cf91d77b29f357344a4c/ArraySegment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/74aa984eb754656295a74b19ce2c83d83a98c9474142135df2360317babf28b/MethodDeclarationSyntax.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/783d1dc48cd9dda2ce32a4b7f3b54c565cfc7914ab1dc5af92d95ec8f166353b/MemoryExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ae15a71be8450a3e7cb3d7362875c6ee247ca783da4ea8736b8201d9532b330/Vector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9f91cf623da6ea77da3e2fe6284157af1a195a6095a59693b476a07ec24c6c49/Max.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a2118c999346899d9b5e224fdac06aef7fecb939f8e3dd6d2778276c14ee7a44/Span.cs" root0="SKIP_HIGHLIGHTING" />
@@ -169,7 +173,7 @@
       <workItem from="1699614399673" duration="1263000" />
       <workItem from="1700137900750" duration="661000" />
       <workItem from="1701423044973" duration="6807000" />
-      <workItem from="1701430920554" duration="369000" />
+      <workItem from="1701430920554" duration="4232000" />
     </task>
     <servers />
   </component>
