@@ -1,5 +1,5 @@
+using System.Buffers;
 using BenchmarkGenerator;
-using Microsoft.Extensions.Primitives;
 using RunGenerator;
 
 namespace App.Day1;
@@ -47,6 +47,29 @@ public static class Day1
 
         return result;
     }
+    
+    [GenerateBenchmark("Day1/Day1.input")]
+    [GenerateRun("Day1/Day1.input")]
+    public static int RunAUsingSearchValues(ReadOnlySpan<char> input)
+    {
+        var tokens = SearchValues.Create("0123456789");
+        var result = 0;
+
+        while (!input.IsEmpty)
+        {
+            var tokenIndex = input.IndexOf('\n');
+            var line = input.Slice(0, tokenIndex);
+            
+            var firstIndex = line.IndexOfAny(tokens);
+            var lastIndex = line.LastIndexOfAny(tokens);
+            result += line[firstIndex] - '0' * 10 + line[lastIndex] - '0';
+            
+            input = input.Slice(line.Length + 1);
+        }
+
+        return result;
+    }
+    
     
     [GenerateBenchmark("Day1/Day1.input")]
     [GenerateRun("Day1/Day1.input")]
@@ -160,6 +183,122 @@ public static class Day1
 
         return result;
     }
+    
+    [GenerateBenchmark("Day1/Day1.input")]
+    [GenerateRun("Day1/Day1.input")]
+    public static int RunBUsingSearchValues(ReadOnlySpan<char> input)
+    {
+        /*Begin: Copy tokens to stack*/
+        var tokenString = "one|two|three|four|five|six|seven|eight|nine";
+        Span<char> span = stackalloc char[tokenString.Length];
+        tokenString.AsSpan().CopyTo(span);
+
+        var tokenCount = span.Count('|') + 1;
+
+        Span<int> sliceIndex = stackalloc int[tokenCount];
+        Span<int> sliceLength = stackalloc int[tokenCount];
+
+        var prevWasDelimiter = true;
+        var prevIndex = 0;
+        var count = 0;
+        for (var i = 0; i < span.Length; i++)
+        {
+            if (prevWasDelimiter)
+            {
+                sliceIndex[count] = i;
+                prevIndex = i;
+                prevWasDelimiter = false;
+            }
+
+            if (span[i] != '|') continue;
+            
+            sliceLength[count] = i - prevIndex;
+            prevWasDelimiter = true;
+            count += 1;
+        }
+
+        sliceLength[sliceLength.Length - 1] = span.Length - prevIndex;
+        /*End: Copy tokens to stack*/
+        
+        Span<int> values = stackalloc int[]
+        {
+            1,2,3,4,5,6,7,8,9
+        };
+        
+        var tokens = SearchValues.Create("0123456789");
+
+        var result = 0;
+            
+        while (!input.IsEmpty)
+        {
+            var tokenIndex = input.IndexOf('\n');
+            var line = input.Slice(0, tokenIndex);
+
+            /*Begin: Same as part A*/
+            var firstValue = 0;
+            var lastValue = 0;
+            
+            var firstIndex = line.IndexOfAny(tokens);
+            var lastIndex = line.LastIndexOfAny(tokens);
+
+            if (firstIndex != -1)
+            {
+                firstValue = line[firstIndex] - '0';
+            }
+            else
+            {
+                firstIndex = int.MaxValue;
+            }
+
+            if (lastIndex != -1)
+            {
+                lastValue = line[lastIndex] - '0';
+            }
+            else
+            {
+                lastIndex = int.MinValue;
+            }
+            /*End: Same as part A*/
+            
+            
+            if (firstIndex > 2) //Skip looking for words since "one" will not fit
+            {
+                for (var i = 0; i < tokenCount; i++)
+                {
+                    var index = line.IndexOf(span.Slice(sliceIndex[i], sliceLength[i]));
+                    if(index == -1) continue;
+                    if (index < firstIndex)
+                    {
+                        firstIndex = index;
+                        firstValue = values[i];
+                        if (index == 0) break;
+                    }
+                }
+            }
+
+            if (lastIndex < line.Length - 3) //Skip looking for words since "one" will not fit
+            {
+                for (var i = 0; i < tokenCount; i++)
+                {
+                    var index = line.LastIndexOf(span.Slice(sliceIndex[i], sliceLength[i]));
+                    if(index == -1) continue;
+                    if (index > lastIndex)
+                    {
+                        lastIndex = index;
+                        lastValue = values[i];
+                        if (index == line.Length - 1) break;
+                    }
+                }
+            }
+
+            result += firstValue * 10 + lastValue;
+
+            input = input.Slice(line.Length + 1);
+        }
+
+        return result;
+    }
+    
     
     [GenerateBenchmark("Day1/Day1.input")]
     [GenerateRun("Day1/Day1.input")]
