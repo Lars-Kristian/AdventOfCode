@@ -14,18 +14,21 @@
     <EmbeddedResource Include="Day1\Day1.input">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Day2\Day2.input" />
+    <EmbeddedResource Include="Day2\Day2.input">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Generator\Generator.csproj"
                       OutputItemType="Analyzer"
-                      ReferenceOutputAssembly="false"
-
-
+                      ReferenceOutputAssembly="true"
                       SetTargetFramework="TargetFramework=netstandard2.0"/>
   </ItemGroup>
 

@@ -189,43 +189,6 @@ public static class BenchmarkSourceUtil
         return sb.ToString();
     }
 
-    public static string GetSource(List<MethodToGenerate> methodToGenerates, string nameSpace, string className)
-    {
-        var sb = new StringBuilder();
-        sb.Append(@"using System.Diagnostics;
-
-namespace "); sb.Append(nameSpace); sb.Append(@";
-
-public class "); sb.Append(className); sb.Append(@"
-{");
-        foreach (var methodToGenerate in methodToGenerates)
-        {
-            var debug = methodToGenerate.MethodParent;
-            sb.Append(@"
-    public static void "); sb.Append(methodToGenerate.MethodParent); sb.Append(methodToGenerate.MethodName); sb.Append(@"()
-    {
-        var sw = Stopwatch.StartNew();
-        var text = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), """);
-            sb.Append(methodToGenerate.AttributeArgument);
-            sb.Append(@"""));");
-
-            sb.Append(@"
-        Console.WriteLine(");
-            sb.Append(methodToGenerate.MethodNamespace);
-            sb.Append(".");
-            sb.Append(methodToGenerate.MethodName);
-            sb.Append(@"(text));");
-            sb.Append(@"
-        sw.Stop();
-        Console.WriteLine($""Time used {sw.ElapsedMilliseconds}ms"");
-    }
-");
-        } 
-        sb.Append(@"
-}");
-        return sb.ToString();
-    }
-
     public static string GetSource2(List<MethodToGenerate> methodToGenerates, string nameSpace, string className)
     {
         var sb = new StringBuilder();
@@ -251,7 +214,7 @@ public class "); sb.Append(className); sb.Append(@"
         public void LogicOnly()
         {
             "); sb.Append(method.MethodNamespace); sb.Append("."); sb.Append(method.MethodName);
-                sb.Append(@"(Text.AsSpan());
+                sb.Append(@"(Text);
         }
         
         [Benchmark]

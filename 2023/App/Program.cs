@@ -1,7 +1,8 @@
 ﻿using BenchmarkDotNet.Running;
+//using Generator;
 
 Console.WriteLine("Application starting...");
 
-//RunGenerator.GeneratedRuns.Day1RunB();
+//RunGenerator.GeneratedRuns.Day2RunB();
 
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day1RunBBenchmark>();
+BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day2RunBBenchmark>();
