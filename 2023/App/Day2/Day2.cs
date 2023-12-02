@@ -59,6 +59,45 @@ public static class Day2
     {
         var result = 0;
 
+        Span<int> colors = stackalloc int['r' - 'b' + 1];
+        
+        foreach (var immutableLine in input.EnumerateLines())
+        {
+            if (immutableLine.IsEmpty) continue;
+
+            var index = immutableLine.IndexOf(":");
+
+            var line = immutableLine.Slice(index + 2); //Forward to where the data is.
+
+            colors.Clear();
+
+            while (!line.IsEmpty)
+            {
+                var tokenIndex = line.IndexOf(" ");
+                if (tokenIndex == -1) break;
+                if (tokenIndex <= 2)
+                {
+                    var value = ParseUtil.ParseIntFast(line.Slice(0, tokenIndex));
+                    var color = line[tokenIndex + 1];
+                    var colorIndex = color - 'b';
+                    if (value > colors[colorIndex]) colors[colorIndex] = value;
+                }
+
+                line = line.Slice(tokenIndex + 1);
+            }
+
+            result += colors['r' - 'b'] * colors['g' - 'b'] * colors['b' - 'b'];
+        }
+
+        return result;
+    }
+    
+    [GenerateRun("Day2/Day2.input")]
+    [GenerateBenchmark("Day2/Day2.input")]
+    public static int RunBInitialSolution(ReadOnlySpan<char> input)
+    {
+        var result = 0;
+
         foreach (var immutableLine in input.EnumerateLines())
         {
             if (immutableLine.IsEmpty) continue;
