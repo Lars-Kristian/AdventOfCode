@@ -10,46 +10,6 @@ public static class Day3
     [GenerateBenchmark("Day3/Day3.input")]
     public static int RunA(ReadOnlySpan<char> input)
     {
-        var result = 0;
-        
-        var tokens = SearchValues.Create(".0123456789\n");
-        var width = input.IndexOf('\n') + 1;
-        var index = -1;
-        
-        Span<int> numbersAroundGear = stackalloc int[6];
-        
-        var remainingInput = input;
-        while (!remainingInput.IsEmpty)
-        {
-            var tokenIndex = remainingInput.IndexOfAnyExcept(tokens);
-            if (tokenIndex == -1) break;
-
-            index += tokenIndex + 1;
-
-            numbersAroundGear.Clear();
-            var numbersFound = LookForGearNumber(numbersAroundGear, 0, input, index - width - 1, index - width + 1);
-            numbersFound = LookForGearNumber(numbersAroundGear, numbersFound, input, index - 1, index + 1);
-            numbersFound = LookForGearNumber(numbersAroundGear, numbersFound, input, index + width - 1,
-                index + width + 1);
-            
-            if (numbersFound > 0)
-            {
-                for (var i = 0; i < numbersFound; i++)
-                {
-                    result += numbersAroundGear[i];
-                }
-            }
-
-            remainingInput = remainingInput.Slice(tokenIndex + 1);
-        }
-
-        return result;
-    }
-    
-    [GenerateRun("Day3/Day3.input")]
-    [GenerateBenchmark("Day3/Day3.input")]
-    public static int RunAInitialSolution(ReadOnlySpan<char> input)
-    {
         var tokens = SearchValues.Create(".0123456789\n");
 
         var width = input.IndexOf('\n') + 1;
@@ -135,9 +95,9 @@ public static class Day3
             index += tokenIndex + 1;
 
             numbersAroundGear.Clear();
-            var numbersFound = LookForGearNumber(numbersAroundGear, 0, input, index - width - 1, index - width + 1);
-            numbersFound = LookForGearNumber(numbersAroundGear, numbersFound, input, index - 1, index + 1);
-            numbersFound = LookForGearNumber(numbersAroundGear, numbersFound, input, index + width - 1,
+            var numbersFound = FindGearNumbers(numbersAroundGear, 0, input, index - width - 1, index - width + 1);
+            numbersFound = FindGearNumbers(numbersAroundGear, numbersFound, input, index - 1, index + 1);
+            numbersFound = FindGearNumbers(numbersAroundGear, numbersFound, input, index + width - 1,
                 index + width + 1);
 
             if (numbersFound > 1)
@@ -158,13 +118,12 @@ public static class Day3
         return result;
     }
 
-    private static int LookForGearNumber(Span<int> numbersAroundGear, int numberIndex, ReadOnlySpan<char> input,
+    private static int FindGearNumbers(Span<int> numbersAroundGear, int numberIndex, ReadOnlySpan<char> input,
         int from, int to)
     {
         var index = from;
 
-        while (input[index] >= '0' && input[index] <= '9' && index > 0)
-            index -= 1; //Rewind cursor to capture numbers starting before <from>. 
+        while (input[index] >= '0' && input[index] <= '9' && index > 0) index -= 1; //Rewind cursor to capture numbers starting before <from>. 
         while (input[index] < '0' || input[index] > '9') index += 1; //Forward cursor to skip '.'-chars.
 
         var currentNumber = 0;
@@ -209,7 +168,7 @@ public static class Day3
     public static long RunTest(ReadOnlySpan<char> input)
     {
         //If we replaced all non-interesting input with '.' maybe searching would be faster.
-        
+
         Span<char> tmpInput = stackalloc char[input.Length];
         input.CopyTo(tmpInput);
 
