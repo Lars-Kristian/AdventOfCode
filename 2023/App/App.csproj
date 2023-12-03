@@ -18,6 +18,10 @@
     <EmbeddedResource Include="Day2\Day2.input">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Day3\Day3.input" />
+    <EmbeddedResource Include="Day3\Day3.input">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -31,5 +35,6 @@
                       ReferenceOutputAssembly="true"
                       SetTargetFramework="TargetFramework=netstandard2.0"/>
   </ItemGroup>
+
 
 </Project>
