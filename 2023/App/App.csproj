@@ -22,6 +22,10 @@
     <EmbeddedResource Include="Day3\Day3.input">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Day4\Day4.input" />
+    <EmbeddedResource Include="Day4\Day4.input">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,7 @@
     <ProjectReference Include="..\..\Generator\Generator.csproj"
                       OutputItemType="Analyzer"
                       ReferenceOutputAssembly="true"
+
                       SetTargetFramework="TargetFramework=netstandard2.0"/>
   </ItemGroup>
 

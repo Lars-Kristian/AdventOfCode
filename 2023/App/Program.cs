@@ -3,7 +3,7 @@ using Generator;
 
 Console.WriteLine("Application has started...");
 
-RunGenerator.GeneratedRuns.Day3RunA();
-RunGenerator.GeneratedRuns.Day3RunB();
+RunGenerator.GeneratedRuns.Day4RunA();
+RunGenerator.GeneratedRuns.Day4RunB();
 
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day3RunBBenchmark>();
+BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day4RunBBenchmark>();
