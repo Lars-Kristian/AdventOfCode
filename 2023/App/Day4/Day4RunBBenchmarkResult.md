@@ -5,7 +5,7 @@ Intel Core i7-9850H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
 
 Toolchain=InProcessNoEmitToolchain
 
-| Method               | Mean      | Error    | StdDev   | Median    | Gen0    | Gen1   | Allocated |
-|--------------------- |----------:|---------:|---------:|----------:|--------:|-------:|----------:|
-| LogicOnly            |  51.49 us | 1.026 us | 2.648 us |  52.67 us |       - |      - |         - |
-| LogicAndReadFromDisk | 127.91 us | 1.080 us | 1.010 us | 128.29 us | 16.3574 | 2.6855 |  104012 B |
+| Method               | Mean      | Error    | StdDev    | Median    | Gen0    | Gen1   | Allocated |
+|--------------------- |----------:|---------:|----------:|----------:|--------:|-------:|----------:|
+| LogicOnly            |  35.36 us | 0.113 us |  0.095 us |  35.37 us |       - |      - |         - |
+| LogicAndReadFromDisk | 125.96 us | 3.623 us | 10.682 us | 119.72 us | 16.3574 | 2.6855 |  104012 B |
