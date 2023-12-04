@@ -1,6 +1,4 @@
-﻿using System.Buffers;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
 using BenchmarkGenerator;
 using RunGenerator;
 
@@ -17,27 +15,27 @@ public static class Day4
         var lineWidth = input.IndexOf('\n');
         var startTokenIndex = input.IndexOf(':') + 1;
         var separatorTokenIndex = input.IndexOf('|');
-        var winningNumberCount = (separatorTokenIndex - startTokenIndex - 1) / 3;
+        var winNumbersCount = (separatorTokenIndex - startTokenIndex - 1) / 3;
         var ticketNumbersCount = (lineWidth - separatorTokenIndex - 1) / 3;
 
         Span<int> resultTable = stackalloc int[] {0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024};
-        Span<byte> winningNumberList = stackalloc byte[winningNumberCount];
+        Span<byte> winNumberList = stackalloc byte[winNumbersCount];
         Span<byte> ticketNumberList = stackalloc byte[ticketNumbersCount];
         
         foreach (var immutableLine in input.EnumerateLines())
         {
             if (immutableLine.IsEmpty) break;
             
-            var winningNumbers = immutableLine.Slice(startTokenIndex, separatorTokenIndex - startTokenIndex - 1);
+            var winNumbers = immutableLine.Slice(startTokenIndex, separatorTokenIndex - startTokenIndex - 1);
             var ticketNumbers = immutableLine.Slice(separatorTokenIndex + 1);
 
-            ParseNumbers(winningNumbers, winningNumberList);
+            ParseNumbers(winNumbers, winNumberList);
             ParseNumbers(ticketNumbers, ticketNumberList);
 
             var numbersFound = 0;
-            for (var i = 0; i < winningNumberList.Length; i++)
+            for (var i = 0; i < winNumberList.Length; i++)
             {
-                if (ticketNumberList.Contains(winningNumberList[i])) numbersFound += 1;
+                if (ticketNumberList.Contains(winNumberList[i])) numbersFound += 1;
             }
 
             result += resultTable[numbersFound];
@@ -104,10 +102,10 @@ public static class Day4
         var lineCount = input.Length / lineWidth;
         var startTokenIndex = input.IndexOf(':') + 1;
         var separatorTokenIndex = input.IndexOf('|');
-        var winningNumberCount = (separatorTokenIndex - startTokenIndex - 1) / 3;
+        var winNumbersCount = (separatorTokenIndex - startTokenIndex - 1) / 3;
         var ticketNumbersCount = (lineWidth - separatorTokenIndex - 1) / 3;
 
-        Span<byte> winningNumberList = stackalloc byte[winningNumberCount];
+        Span<byte> winNumberList = stackalloc byte[winNumbersCount];
         Span<byte> ticketNumberList = stackalloc byte[ticketNumbersCount];
         
         Span<int> result = stackalloc int[lineCount];
@@ -119,16 +117,16 @@ public static class Day4
             
             if (immutableLine.IsEmpty) break;
             
-            var winningNumbers = immutableLine.Slice(startTokenIndex, separatorTokenIndex - startTokenIndex - 1);
+            var winNumbers = immutableLine.Slice(startTokenIndex, separatorTokenIndex - startTokenIndex - 1);
             var ticketNumbers = immutableLine.Slice(separatorTokenIndex + 1);
 
-            ParseNumbers(winningNumbers, winningNumberList);
+            ParseNumbers(winNumbers, winNumberList);
             ParseNumbers(ticketNumbers, ticketNumberList);
 
             var numbersFound = 0;
-            for (var i = 0; i < winningNumberList.Length; i++)
+            for (var i = 0; i < winNumberList.Length; i++)
             {
-                if (ticketNumberList.Contains(winningNumberList[i])) numbersFound += 1;
+                if (ticketNumberList.Contains(winNumberList[i])) numbersFound += 1;
             }
 
             cardNumber += 1;
@@ -167,15 +165,15 @@ public static class Day4
             
             var ticketData = immutableLine.Slice(immutableLine.IndexOf(':') + 1);
             var separatorIndex = ticketData.IndexOf('|');
-            var winningNumbers = ticketData.Slice(0, separatorIndex);
+            var winNumbers = ticketData.Slice(0, separatorIndex);
             var ticketNumbers = ticketData.Slice(separatorIndex + 1);
 
-            var winningNumberCount = (winningNumbers.Length - 1) / 3;
+            var winNumberCount = (winNumbers.Length - 1) / 3;
 
             var numbersFound = 0;
-            for (var i = 0; i < winningNumberCount; i++)
+            for (var i = 0; i < winNumberCount; i++)
             {
-                var numberToCheck = winningNumbers.Slice((i * 3), 3);
+                var numberToCheck = winNumbers.Slice((i * 3), 3);
                 var found = ticketNumbers.IndexOf(numberToCheck);
                 if (found != -1) numbersFound += 1;
             }
