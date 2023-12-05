@@ -13,4 +13,13 @@ public static class ParseUtil
 
         return result;
     }
+    
+    public static long ParseLongFast(ReadOnlySpan<char> span)
+    {
+        long result = 0;
+        for (var i = 0; i < span.Length; i++)
+            result = result * 10 + span[i] - '0';
+
+        return result;
+    }
 }
