@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text;
 using App.Common;
 using BenchmarkGenerator;
 using RunGenerator;
@@ -7,89 +8,6 @@ namespace App.Day5;
 
 public static class Day5
 {
-    [GenerateRun("Day5/Day5.input")]
-    [GenerateBenchmark("Day5/Day5.input")]
-    public static long RunA(ReadOnlySpan<char> input)
-    {
-        var result = 0;
-        Span<long> seeds = stackalloc long[50];
-        Span<MapDescriptor> tmpBuffer = stackalloc MapDescriptor[250];
-        var listBufferIndex = 0;
-        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[20];
-
-        var allLines = input.EnumerateLines();
-
-        allLines.MoveNext();
-
-        var line = allLines.Current;
-        line = line.Slice(line.IndexOf(':') + 2); //Skip to data
-
-        var seedCount = ParseSeedNumbers(line, seeds);
-        seeds = seeds.Slice(0, seedCount);
-
-        allLines.MoveNext();
-        var bufferIndex = 0;
-        while (true)
-        {
-            if (!allLines.MoveNext()) break;
-
-            listBuffer[listBufferIndex].From = bufferIndex;
-
-            while (true)
-            {
-                allLines.MoveNext();
-                line = allLines.Current;
-                if (line.IsEmpty) break;
-
-                var toSpan = line.Slice(0, line.IndexOf(' '));
-                line = line.Slice(toSpan.Length + 1);
-                var fromSpan = line.Slice(0, line.IndexOf(' '));
-                var rangeSpan = line.Slice(fromSpan.Length + 1);
-
-                tmpBuffer[bufferIndex].From = ParseUtil.ParseLongFast(fromSpan);
-                tmpBuffer[bufferIndex].To = ParseUtil.ParseLongFast(toSpan);
-                tmpBuffer[bufferIndex].Range = ParseUtil.ParseLongFast(rangeSpan);
-
-                bufferIndex += 1;
-            }
-
-            listBuffer[listBufferIndex].To = bufferIndex;
-            listBufferIndex += 1;
-        }
-
-        listBuffer = listBuffer.Slice(0, listBufferIndex);
-
-
-        var minLocation = long.MaxValue;
-        for (var seedIndex = 0; seedIndex < seeds.Length; seedIndex++)
-        {
-            var seed = seeds[seedIndex];
-            for (var listIndex = 0; listIndex < listBuffer.Length; listIndex++)
-            {
-                var list = listBuffer[listIndex];
-                for (var i = list.From; i < list.To; i++)
-                {
-                    var map = tmpBuffer[i];
-                    if (seed >= map.From && seed < map.From + map.Range)
-                    {
-                        var mapOffset = seed - map.From;
-                        seed = map.To + mapOffset;
-                        break;
-                    }
-                }
-            }
-
-            if (seed < minLocation)
-            {
-                minLocation = seed;
-            }
-        }
-
-        var debug = "";
-
-        return minLocation;
-    }
-
     private struct ListDescriptor
     {
         public int From;
@@ -103,68 +21,95 @@ public static class Day5
         public long Range;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int ParseSeedNumbers(ReadOnlySpan<char> line, Span<long> result)
+    private struct Range
     {
-        var resultIndex = 0;
+        public long From;
+        public long To;
+    }
+    
+    
+    [GenerateRun("Day5/Day5.input")]
+    [GenerateBenchmark("Day5/Day5.input")]
+    public static long RunA(ReadOnlySpan<char> input)
+    {
+        Span<long> seedBuffer = stackalloc long[50];
+        Span<MapDescriptor> mapBuffer = stackalloc MapDescriptor[250];
+        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[50];
+
+        var lines = input.EnumerateLines();
+        lines.MoveNext();
+        
+        ParseSeedNumbers(lines, ref seedBuffer);
+        lines.MoveNext();
+        
+        ParseMaps(lines, ref listBuffer, ref mapBuffer);
+        
+        var minResult = long.MaxValue;
+        for (var seedIndex = 0; seedIndex < seedBuffer.Length; seedIndex++)
+        {
+            var seed = seedBuffer[seedIndex];
+            for (var listIndex = 0; listIndex < listBuffer.Length; listIndex++)
+            {
+                var list = listBuffer[listIndex];
+                for (var i = list.From; i < list.To; i++)
+                {
+                    var map = mapBuffer[i];
+                    if (seed >= map.From && seed < map.From + map.Range)
+                    {
+                        var mapOffset = seed - map.From;
+                        seed = map.To + mapOffset;
+                        break;
+                    }
+                }
+            }
+
+            if (seed < minResult) minResult = seed;
+        }
+
+        return minResult;
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void ParseSeedNumbers(SpanLineEnumerator lines, ref Span<long> seeds)
+    {
+        var line = lines.Current;
+        line = line.Slice(line.IndexOf(':') + 2); //Skip prefix
+        
+        var seedCount = 0;
         while (!line.IsEmpty)
         {
             var tokenIndex = line.IndexOf(' ');
             if (tokenIndex == -1)
             {
                 var lastNumber = line.Slice(0, line.Length);
-                result[resultIndex] = ParseUtil.ParseLongFast(lastNumber);
+                seeds[seedCount] = ParseUtil.ParseLongFast(lastNumber);
                 break;
             }
 
             var number = line.Slice(0, tokenIndex);
-            result[resultIndex] = ParseUtil.ParseLongFast(number);
+            seeds[seedCount] = ParseUtil.ParseLongFast(number);
             line = line.Slice(number.Length + 1);
-            resultIndex += 1;
+            seedCount += 1;
         }
 
-        return resultIndex + 1;
+        seeds = seeds.Slice(0, seedCount + 1);
     }
-
-    private struct Range
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static void ParseMaps(SpanLineEnumerator lines, ref Span<ListDescriptor> listBuffer, ref Span<MapDescriptor> mapBuffer)
     {
-        public long From;
-        public long To;
-    }
-
-    [GenerateRun("Day5/Day5.input")]
-    [GenerateBenchmark("Day5/Day5.input")]
-    public static long RunB(ReadOnlySpan<char> input)
-    {
-        var result = 0;
-        Span<long> seeds = stackalloc long[50];
-        Span<MapDescriptor> mapBuffer = stackalloc MapDescriptor[250];
-
-        var listBufferIndex = 0;
-        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[20];
-
-        var allLines = input.EnumerateLines();
-
-        allLines.MoveNext();
-
-        var line = allLines.Current;
-        line = line.Slice(line.IndexOf(':') + 2); //Skip to data
-
-        var seedCount = ParseSeedNumbers(line, seeds);
-        seeds = seeds.Slice(0, seedCount);
-
-        allLines.MoveNext();
-        var bufferIndex = 0;
+        var listCount = 0;
+        var mapCount = 0;
         while (true)
         {
-            if (!allLines.MoveNext()) break;
+            if (!lines.MoveNext()) break;
 
-            listBuffer[listBufferIndex].From = bufferIndex;
+            listBuffer[listCount].From = mapCount;
 
             while (true)
             {
-                allLines.MoveNext();
-                line = allLines.Current;
+                lines.MoveNext();
+                var line = lines.Current;
                 if (line.IsEmpty) break;
 
                 var toSpan = line.Slice(0, line.IndexOf(' '));
@@ -172,40 +117,55 @@ public static class Day5
                 var fromSpan = line.Slice(0, line.IndexOf(' '));
                 var rangeSpan = line.Slice(fromSpan.Length + 1);
 
-                mapBuffer[bufferIndex].From = ParseUtil.ParseLongFast(fromSpan);
-                mapBuffer[bufferIndex].To = ParseUtil.ParseLongFast(toSpan);
-                mapBuffer[bufferIndex].Range = ParseUtil.ParseLongFast(rangeSpan);
+                mapBuffer[mapCount].From = ParseUtil.ParseLongFast(fromSpan);
+                mapBuffer[mapCount].To = ParseUtil.ParseLongFast(toSpan);
+                mapBuffer[mapCount].Range = ParseUtil.ParseLongFast(rangeSpan);
 
-                bufferIndex += 1;
+                mapCount += 1;
             }
 
-            listBuffer[listBufferIndex].To = bufferIndex;
-            listBufferIndex += 1;
+            listBuffer[listCount].To = mapCount;
+            listCount += 1;
         }
 
-        listBuffer = listBuffer.Slice(0, listBufferIndex);
+        mapBuffer = mapBuffer.Slice(0, mapCount);
+        listBuffer = listBuffer.Slice(0, listCount);
+    }
+    
+    [GenerateRun("Day5/Day5.input")]
+    [GenerateBenchmark("Day5/Day5.input")]
+    public static long RunB(ReadOnlySpan<char> input)
+    {
+        Span<long> seedBuffer = stackalloc long[50];
+        Span<MapDescriptor> mapBuffer = stackalloc MapDescriptor[250];
+        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[50];
 
-        var rangeCount = seeds.Length / 2;
-        Span<Range> rangeBuffer = stackalloc Range[rangeCount];
-        for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++)
+        var lines = input.EnumerateLines();
+        lines.MoveNext();
+        
+        ParseSeedNumbers(lines, ref seedBuffer);
+        lines.MoveNext();
+        
+        ParseMaps(lines, ref listBuffer, ref mapBuffer);
+
+        Span<Range> rangeBuffer = stackalloc Range[seedBuffer.Length / 2];
+        
+        for (var rangeIndex = 0; rangeIndex < rangeBuffer.Length; rangeIndex++)
         {
             var seedIndex = rangeIndex * 2;
 
-            rangeBuffer[rangeIndex].From = seeds[seedIndex];
-            rangeBuffer[rangeIndex].To = seeds[seedIndex] + seeds[seedIndex + 1] - 1;
+            rangeBuffer[rangeIndex].From = seedBuffer[seedIndex];
+            rangeBuffer[rangeIndex].To = seedBuffer[seedIndex] + seedBuffer[seedIndex + 1] - 1;
         }
 
-        var minLocation = long.MaxValue;
+        var minResult = long.MaxValue;
         for (var rangeIndex = 0; rangeIndex < rangeBuffer.Length; rangeIndex++)
         {
             var min = FindMinLocationInRange(rangeBuffer[rangeIndex], mapBuffer, listBuffer);
-            if (min < minLocation) minLocation = min;
+            if (min < minResult) minResult = min;
         }
 
-
-        var debug = "";
-
-        return minLocation;
+        return minResult;
     }
 
     private static long FindMinLocationInRange(Range range, Span<MapDescriptor> mapBuffer,
@@ -219,8 +179,10 @@ public static class Day5
         for (var listIndex = initialListIndex; listIndex < listBuffer.Length; listIndex++)
         {
             var list = listBuffer[listIndex];
+            
             var mapIndex = list.From;
             if (initialMapIndex > mapIndex) mapIndex = initialMapIndex;
+            
             for (; mapIndex < list.To; mapIndex++)
             {
                 var map = mapBuffer[mapIndex];
@@ -321,67 +283,31 @@ public static class Day5
         return minLocation;
     }
     
+    
     [GenerateRun("Day5/Day5.input")]
     [GenerateBenchmark("Day5/Day5.input")]
-    public static long RunBBrute(ReadOnlySpan<char> input)
+    public static long RunBBruteForce(ReadOnlySpan<char> input)
     {
-        var result = 0;
-        Span<long> seeds = stackalloc long[50];
+        Span<long> seedBuffer = stackalloc long[50];
         Span<MapDescriptor> mapBuffer = stackalloc MapDescriptor[250];
+        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[50];
 
-        var listBufferIndex = 0;
-        Span<ListDescriptor> listBuffer = stackalloc ListDescriptor[20];
+        var lines = input.EnumerateLines();
+        lines.MoveNext();
+        
+        ParseSeedNumbers(lines, ref seedBuffer);
+        lines.MoveNext();
+        
+        ParseMaps(lines, ref listBuffer, ref mapBuffer);
 
-        var allLines = input.EnumerateLines();
-
-        allLines.MoveNext();
-
-        var line = allLines.Current;
-        line = line.Slice(line.IndexOf(':') + 2); //Skip to data
-
-        var seedCount = ParseSeedNumbers(line, seeds);
-        seeds = seeds.Slice(0, seedCount);
-
-        allLines.MoveNext();
-        var bufferIndex = 0;
-        while (true)
-        {
-            if (!allLines.MoveNext()) break;
-
-            listBuffer[listBufferIndex].From = bufferIndex;
-
-            while (true)
-            {
-                allLines.MoveNext();
-                line = allLines.Current;
-                if (line.IsEmpty) break;
-
-                var toSpan = line.Slice(0, line.IndexOf(' '));
-                line = line.Slice(toSpan.Length + 1);
-                var fromSpan = line.Slice(0, line.IndexOf(' '));
-                var rangeSpan = line.Slice(fromSpan.Length + 1);
-
-                mapBuffer[bufferIndex].From = ParseUtil.ParseLongFast(fromSpan);
-                mapBuffer[bufferIndex].To = ParseUtil.ParseLongFast(toSpan);
-                mapBuffer[bufferIndex].Range = ParseUtil.ParseLongFast(rangeSpan);
-
-                bufferIndex += 1;
-            }
-
-            listBuffer[listBufferIndex].To = bufferIndex;
-            listBufferIndex += 1;
-        }
-
-        listBuffer = listBuffer.Slice(0, listBufferIndex);
-
-        var rangeCount = seeds.Length / 2;
-        Span<Range> rangeBuffer = stackalloc Range[rangeCount];
-        for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++)
+        Span<Range> rangeBuffer = stackalloc Range[seedBuffer.Length / 2];
+        
+        for (var rangeIndex = 0; rangeIndex < rangeBuffer.Length; rangeIndex++)
         {
             var seedIndex = rangeIndex * 2;
 
-            rangeBuffer[rangeIndex].From = seeds[seedIndex];
-            rangeBuffer[rangeIndex].To = seeds[seedIndex] + seeds[seedIndex + 1] - 1;
+            rangeBuffer[rangeIndex].From = seedBuffer[seedIndex];
+            rangeBuffer[rangeIndex].To = seedBuffer[seedIndex] + seedBuffer[seedIndex + 1] - 1;
         }
 
         var minLocation = long.MaxValue;
@@ -418,5 +344,4 @@ public static class Day5
 
         return minLocation;
     }
-
 }
