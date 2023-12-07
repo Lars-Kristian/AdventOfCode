@@ -2,6 +2,8 @@
 
 Console.WriteLine("Application has started...");
 
-RunGenerator.GeneratedRuns.Day6RunA();
-RunGenerator.GeneratedRuns.Day6RunB();
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day6RunBBenchmark>();
+RunGenerator.GeneratedRuns.Day7RunA();
+RunGenerator.GeneratedRuns.Day7RunB();
+//RunGenerator.GeneratedRuns.Day7RunBuildMap();
+
+BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day7RunBBenchmark>();
