@@ -8,13 +8,6 @@ namespace App.Day7;
 
 public static class Day7
 {
-    private struct Hand
-    {
-        public int Bid;
-        public HandType Type;
-        public long Cards;
-    }
-
     private enum HandType
     {
         HighCard = 0,
@@ -25,15 +18,44 @@ public static class Day7
         FourOfKind,
         FiveOfKind,
     }
-
+    
+    //Data-layout:
+    //            56        48        40        32        24        16
+    //b0_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000
+    //   0000_0111|0000_1100|0000_1100|0000_1100|0000_1100|0000_1100|0000_0011_1110_1000
+    //  |     type|     card|     card|     card|     card|     card|                bid
+    
+    private static int[] CardToByteMap = { 0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, 9, 11, -1, -1, -1, -1, -1, 10, -1, -1, 8};
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static byte CardToByte(char card)
+    {
+        var index = card - '2';
+        return (byte)CardToByteMap[index];
+    }
+    
+    private static int[] CardWithJokerToByteMap = { 1, 2, 3, 4, 5, 6, 7, 8, -1, -1, -1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, 0, 11, -1, -1, -1, -1, -1, 10, -1, -1, 9};
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static byte CardWithJokerToByte(char card)
+    {
+        var index = card - '2';
+        return (byte)CardWithJokerToByteMap[index];
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static char ByteToCardWithJoker(byte card)
+    {
+        var availableCards = "J23456789TQKA";
+        return availableCards[card];
+    }
+    
     [GenerateRun("Day7/Day7.input")]
     [GenerateBenchmark("Day7/Day7.input")]
     public static long RunA(ReadOnlySpan<char> input)
     {
         var width = input.IndexOf('\n');
         var length = input.Length / width;
-
-        Span<Hand> hands = stackalloc Hand[length];
+        
+        Span<long> hands = stackalloc long[length];
         var handCount = 0;
 
         var lineEnumerator = input.EnumerateLines();
@@ -47,16 +69,19 @@ public static class Day7
             var cardSpan = line.Slice(0, tokenIndex);
             var bidSpan = line.Slice(tokenIndex + 1, line.Length - tokenIndex - 1);
 
-            //Pack cards into long because C# does not support fixed size arrays in structs. :(
+            //Pack entire hand into a long.
+            long type = 0;
+            
             long cards = 0;
-            foreach (var c in cardSpan)
+            for (var index = 0; index < 5; index++)
             {
-                var cardAsByte = CardToByteOptimized(c);
+                var c = cardSpan[index];
+                var cardAsByte = CardToByte(c);
                 cards = (cards << 8) + cardAsByte;
             }
 
-            hands[handCount].Bid = ParseUtil.ParseIntFast(bidSpan);
-            hands[handCount].Cards = cards;
+            long bid = ParseUtil.ParseIntFast(bidSpan);
+            hands[handCount] = (type << 56) | (cards << 16) | bid;
             handCount += 1;
         }
 
@@ -66,13 +91,15 @@ public static class Day7
         for (var handIndex = 0; handIndex < hands.Length; handIndex++)
         {
             typeMap.Clear();
+            var cards = (hands[handIndex] >> 16) & 0xFF_FFFF_FFFF;
+            
             for (var cardIndex = 4; cardIndex >= 0; cardIndex--)
             {
-                var c = (byte)(hands[handIndex].Cards >> (8 * cardIndex));
+                var c = (byte)(cards >> (8 * cardIndex));
                 typeMap[c] += 1;
             }
 
-            var type = HandType.HighCard;
+            var type = (HandType)(hands[handIndex] >> 56 & 0xFFFF);
             for (var typeMapIndex = 0; typeMapIndex < typeMap.Length; typeMapIndex++)
             {
                 var t = typeMap[typeMapIndex];
@@ -113,84 +140,19 @@ public static class Day7
                 }
             }
 
-            hands[handIndex].Type = type;
+            hands[handIndex] &= ~((long)0xFFFF << 56);
+            hands[handIndex] |= (long)type << 56;
         }
-
-
-        hands.Sort<Hand>((a, b) =>
-        {
-            var diff = a.Type - b.Type;
-            if (diff != 0) return diff;
-
-            for (var i = 4; i >= 0; i--)
-            {
-                var aCard = (byte)(a.Cards >> (8 * i));
-                var bCard = (byte)(b.Cards >> (8 * i));
-                var cardDiff = aCard - bCard;
-                if (cardDiff != 0) return cardDiff;
-            }
-
-            return 0;
-        });
-
+        
+        hands.Sort();
+        
         long result = 0;
         for (var i = 0; i < hands.Length; i++)
         {
-            result += (i + 1) * hands[i].Bid;
+            result += (i + 1) * (hands[i] & 0xFFFF);
         }
         
         return result;
-    }
-
-
-    //Optimize: can use a map;
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte CardToByte(char card)
-    {
-        var availableCards = "23456789TJQKA";
-        var index = availableCards.IndexOf(card);
-        if (index == -1) throw new Exception("Card not found");
-        return (byte)index;
-    }
-
-    private static int[] CardToByteMap = { 0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, 9, 11, -1, -1, -1, -1, -1, 10, -1, -1, 8};
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte CardToByteOptimized(char card)
-    {
-        var index = card - '2';
-        return (byte)CardToByteMap[index];
-    }
-
-    //Optimize: can use a map;
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte CardWithJokerToByte(char card)
-    {
-        var availableCards = "J23456789TQKA";
-        var index = availableCards.IndexOf(card);
-        if (index == -1) throw new Exception("Card not found");
-        return (byte)index;
-    }
-    
-    private static int[] CardWithJokerToByteMap = { 1, 2, 3, 4, 5, 6, 7, 8, -1, -1, -1, -1, -1, -1, -1, 12, -1, -1, -1, -1, -1, -1, -1, -1, 0, 11, -1, -1, -1, -1, -1, 10, -1, -1, 9};
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte CardWithJokerToByteOptimized(char card)
-    {
-        var index = card - '2';
-        return (byte)CardWithJokerToByteMap[index];
-    }
-    
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static char ByteToCardWithJoker(byte card)
-    {
-        var availableCards = "J23456789TQKA";
-        return availableCards[card];
-    }
-
-    //Optimize: can use a map;
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte CardToByteDebug(char card)
-    {
-        return (byte)card;
     }
     
     [GenerateRun("Day7/Day7.input")]
@@ -199,8 +161,8 @@ public static class Day7
     {
         var width = input.IndexOf('\n');
         var length = input.Length / width;
-
-        Span<Hand> hands = stackalloc Hand[length];
+        
+        Span<long> hands = stackalloc long[length];
         var handCount = 0;
 
         var lineEnumerator = input.EnumerateLines();
@@ -214,30 +176,35 @@ public static class Day7
             var cardSpan = line.Slice(0, tokenIndex);
             var bidSpan = line.Slice(tokenIndex + 1, line.Length - tokenIndex - 1);
 
-            //Pack cards into long because C# does not support fixed size arrays in structs. :(
+            //Pack entire hand into a long.
+            long type = 0;
+            
             long cards = 0;
-            foreach (var c in cardSpan)
+            for (var index = 0; index < 5; index++)
             {
-                var cardAsByte = CardWithJokerToByteOptimized(c);
+                var c = cardSpan[index];
+                var cardAsByte = CardWithJokerToByte(c);
                 cards = (cards << 8) + cardAsByte;
             }
 
-            hands[handCount].Bid = ParseUtil.ParseIntFast(bidSpan);
-            hands[handCount].Cards = cards;
+            long bid = ParseUtil.ParseIntFast(bidSpan);
+            hands[handCount] = (type << 56) | (cards << 16) | bid;
             handCount += 1;
         }
 
         hands = hands.Slice(0, handCount);
 
         Span<byte> typeMap = stackalloc byte[13];
-        var joker = CardWithJokerToByteOptimized('J');
+        var joker = CardWithJokerToByte('J');
         for (var handIndex = 0; handIndex < hands.Length; handIndex++)
         {
             var jokerCount = 0;
             typeMap.Clear();
+            var cards = (hands[handIndex] >> 16) & 0xFF_FFFF_FFFF;
+            
             for (var cardIndex = 4; cardIndex >= 0; cardIndex--)
             {
-                var c = (byte)(hands[handIndex].Cards >> (8 * cardIndex));
+                var c = (byte)(cards >> (8 * cardIndex));
                 if (c == joker)
                 {
                     jokerCount += 1;
@@ -248,7 +215,8 @@ public static class Day7
                 }
             }
 
-            var type = HandType.HighCard;
+            var type = (HandType)(hands[handIndex] >> 56 & 0xFFFF);
+            
             for (var typeMapIndex = 0; typeMapIndex < typeMap.Length; typeMapIndex++)
             {
                 var t = typeMap[typeMapIndex];
@@ -321,56 +289,44 @@ public static class Day7
                 type = HandType.FiveOfKind;
             }
 
-            hands[handIndex].Type = type;
+            hands[handIndex] &= ~((long)0xFFFF << 56);
+            hands[handIndex] |= (long)type << 56;
         }
-
-
-        hands.Sort((a, b) =>
-        {
-            var diff = a.Type - b.Type;
-            if (diff != 0) return diff;
-
-            for (var i = 4; i >= 0; i--)
-            {
-                int aCard = (byte)(a.Cards >> (8 * i));
-                int bCard = (byte)(b.Cards >> (8 * i));
-                var cardDiff = aCard - bCard;
-                if (cardDiff != 0) return cardDiff;
-            }
-
-            return 0;
-        });
-
+        
+        hands.Sort();
+        
         long result = 0;
         for (var i = 0; i < hands.Length; i++)
         {
-            result += (i + 1) * hands[i].Bid;
+            result += (i + 1) * (hands[i] & 0xFFFF);
         }
         
         return result;
     }
     
-    private static string HandsToString(ReadOnlySpan<Hand> hands)
+    private static string HandsWithJokerToString(ReadOnlySpan<long> hands)
     {
         var sb = new StringBuilder();
         foreach (var hand in hands)
         {
+            var type = (HandType)((hand >> 56) & 0xFFFF);
+            var cards = (hand >> 16) & 0xFF_FFFF_FFFF;
+            var bid = (int)(hand & 0xFFFF);
             for (var i = 4; i >= 0; i--)
             {
-                var card = (byte)(hand.Cards >> (8 * i));
+                var card = (byte)(cards >> (8 * i));
                 sb.Append(ByteToCardWithJoker(card));
             }
             
             sb.Append(" ");
-            sb.Append(hand.Bid);
+            sb.Append(bid);
             sb.Append("\n");
         }
 
         return sb.ToString();
     }
 
-    [GenerateRun("Day7/Day7.input")]
-    public static long RunBuildMap(ReadOnlySpan<char> input)
+    public static long RunBuildMap()
     {
 
         var mapArray = new int['T' - '2' + 1];
