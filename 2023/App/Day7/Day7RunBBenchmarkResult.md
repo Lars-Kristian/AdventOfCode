@@ -5,10 +5,10 @@ Intel Core i7-9850H CPU 2.60GHz, 1 CPU, 12 logical and 6 physical cores
 
 Toolchain=InProcessNoEmitToolchain
 
-| Method               | Mean     | Error   | StdDev  | Gen0   | Gen1   | Allocated |
-|--------------------- |---------:|--------:|--------:|-------:|-------:|----------:|
-| LogicOnly            | 134.8 us | 0.72 us | 0.67 us |      - |      - |         - |
-| LogicAndReadFromDisk | 206.1 us | 0.94 us | 0.83 us | 9.5215 | 0.9766 |   60690 B |
+| Method               | Mean      | Error    | StdDev   | Gen0   | Gen1   | Allocated |
+|--------------------- |----------:|---------:|---------:|-------:|-------:|----------:|
+| LogicOnly            |  80.62 us | 1.162 us | 1.087 us |      - |      - |         - |
+| LogicAndReadFromDisk | 149.39 us | 0.950 us | 0.794 us | 9.5215 | 0.9766 |   60690 B |
 
 
 BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2715/22H2/2022Update/SunValley2)
@@ -22,5 +22,3 @@ Toolchain=InProcessNoEmitToolchain
 |--------------------- |---------:|---------:|---------:|-------:|-------:|----------:|
 | LogicOnly            | 28.36 us | 0.201 us | 0.188 us |      - |      - |         - |
 | LogicAndReadFromDisk | 51.75 us | 0.379 us | 0.355 us | 1.2207 | 0.1221 |   62688 B |
-
-
