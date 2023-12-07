@@ -20,5 +20,5 @@ Toolchain=InProcessNoEmitToolchain
 
 | Method               | Mean     | Error    | StdDev   | Gen0   | Gen1   | Allocated |
 |--------------------- |---------:|---------:|---------:|-------:|-------:|----------:|
-| LogicOnly            | 28.36 us | 0.201 us | 0.188 us |      - |      - |         - |
-| LogicAndReadFromDisk | 51.75 us | 0.379 us | 0.355 us | 1.2207 | 0.1221 |   62688 B |
+| LogicOnly            | 28.17 us | 0.207 us | 0.194 us |      - |      - |         - |
+| LogicAndReadFromDisk | 50.29 us | 0.345 us | 0.323 us | 1.2207 | 0.1221 |   62688 B |
