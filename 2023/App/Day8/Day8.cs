@@ -191,10 +191,7 @@ public static class Day8
                 if (isEndNode[nodeIndex]) break;
 
                 instructionsIndex += 1;
-                if (instructionsIndex >= instructions.Length)
-                {
-                    instructionsIndex = 0;
-                }
+                if (instructionsIndex >= instructions.Length) instructionsIndex = 0;
 
                 if (instructions[instructionsIndex] == 0)
                 {
