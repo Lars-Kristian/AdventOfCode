@@ -1,4 +1,6 @@
-﻿using AdventOfCode2024.App.Common;
+﻿using System.Globalization;
+using System.Numerics.Tensors;
+using AdventOfCode2024.App.Common;
 using BenchmarkGenerator;
 using RunGenerator;
 
@@ -45,6 +47,53 @@ public class Day1
         }
 
         return result;
+    }
+    
+    [GenerateRun("Day1/Day1.input")]
+    //[GenerateRun("Day1/Day1-test.input")]
+    [GenerateBenchmark("Day1/Day1.input")]
+    public static int RunA2(ReadOnlySpan<char> input)
+    {
+        Span<int> leftData = stackalloc int[1000];
+        Span<int> rightData = stackalloc int[1000];
+        
+        Span<int> data = stackalloc int[1000];
+        
+        var lines = input.Split('\n');
+        var indexCount = 0;
+        foreach (var lineRange in lines)
+        {
+            var line = input[lineRange];
+            if (line.IsEmpty) break;
+            var tokens = line.Split("   ");
+
+            /*
+            tokens.MoveNext();
+            int.TryParse(line[tokens.Current], NumberStyles.Integer, NumberFormatInfo.CurrentInfo,
+                out leftData[indexCount]);
+            tokens.MoveNext();
+            int.TryParse(line[tokens.Current], NumberStyles.Integer, NumberFormatInfo.CurrentInfo,
+                out rightData[indexCount]);
+            */
+            tokens.MoveNext();
+            leftData[indexCount] = ParseUtil.ParseIntFast(line[tokens.Current]);
+            
+            tokens.MoveNext();
+            rightData[indexCount] = ParseUtil.ParseIntFast(line[tokens.Current]);
+            
+            indexCount += 1;
+        }
+        
+        leftData = leftData.Slice(0, indexCount);
+        rightData = rightData.Slice(0, indexCount);
+        data = data.Slice(0, indexCount);
+        
+        leftData.Sort();
+        rightData.Sort();
+        
+        TensorPrimitives.Subtract(leftData, rightData, data);
+        TensorPrimitives.Abs(data, data);
+        return TensorPrimitives.Sum<int>(data);
     }
     
     [GenerateRun("Day1/Day1.input")]

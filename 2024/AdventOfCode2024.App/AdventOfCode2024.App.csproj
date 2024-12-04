@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+      <PackageReference Include="System.Numerics.Tensors" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -42,6 +43,14 @@
       </EmbeddedResource>
       <None Remove="Day3\Day3-test.input" />
       <EmbeddedResource Include="Day3\Day3-test.input">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Day4\Day4.input" />
+      <EmbeddedResource Include="Day4\Day4.input">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Day4\Day4-test.input" />
+      <EmbeddedResource Include="Day4\Day4-test.input">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>
