@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using BenchmarkGenerator;
 using RunGenerator;
 
-namespace App.Common.Day4;
+namespace AdventOfCode2024.App.Day4;
 
 public class Day4
 {
