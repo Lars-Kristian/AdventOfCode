@@ -3,8 +3,14 @@ using Generator;
 
 Console.WriteLine("Application has started...");
 
-RunGenerator.GeneratedRuns.Day5RunA();
-RunGenerator.GeneratedRuns.Day5RunA2();
+RunGenerator.GeneratedRuns.Day6RunA();
+RunGenerator.GeneratedRuns.Day6RunA2();
+RunGenerator.GeneratedRuns.Day6RunB();
+RunGenerator.GeneratedRuns.Day6RunB2();
 
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day5RunABenchmark>();
-BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day5RunA2Benchmark>();
+//371
+//1379
+//1397
+//1602
+//BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day6RunBBenchmark>();
+BenchmarkRunner.Run<BenchmarkGenerator.GeneratedBenchmarks.Day6RunB2Benchmark>();
